@@ -13,5 +13,5 @@ jobs:
         uses: srggrs/assign-one-project-github-action@1.2.1
         if: github.event.action == 'opened'
         with:
-          project: 'https://github.com/yourusername/yourrepo/projects/1'
+          project: 'https://github.com/joshuamorony/refresh-app/projects/1'
           column_name: 'Backlog'
