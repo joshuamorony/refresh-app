@@ -9,7 +9,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +42,7 @@
     "@angular/compiler-cli": "~13.0.0",
     "@angular/language-service": "~13.0.0",
     "@capacitor/cli": "3.4.1",
+    "@cypress/schematic": "^1.6.0",
     "@ionic/angular-toolkit": "^5.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
@@ -60,7 +63,8 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.4.4"
+    "typescript": "~4.4.4",
+    "cypress": "latest"
   },
   "description": "An Ionic project"
 }
