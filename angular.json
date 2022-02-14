@@ -31,10 +31,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": [
-              "src/theme/variables.scss",
-              "src/global.scss"
-            ],
+            "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,
@@ -99,18 +96,7 @@
             "tsConfig": "tsconfig.spec.json",
             "styles": [],
             "scripts": [],
-            "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
-            ]
+            "assets": ["src/favicon.ico", "src/assets"]
           },
           "configurations": {
             "ci": {
@@ -122,10 +108,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
