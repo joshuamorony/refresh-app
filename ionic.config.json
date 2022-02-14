@@ -1,0 +1,7 @@
+{
+  "name": "refresh-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
