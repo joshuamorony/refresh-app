@@ -18,5 +18,6 @@ jobs:
         with:
           build: npm run build
           start: npm start
+          wait-on: "http://localhost:4200"
       - name: Jest run
         run: ng test
