@@ -4,22 +4,21 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { AuthService } from '../shared/data-access/auth.service';
 
+jest.mock('../shared/data-access/auth.service');
+
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
 
-  let mockAuthService: Pick<AuthService, 'loginWithGoogle'>;
-
   beforeEach(
     waitForAsync(() => {
-      mockAuthService = {
-        loginWithGoogle: jest.fn(),
-      };
+      jest.restoreAllMocks();
+      jest.clearAllMocks();
 
       TestBed.configureTestingModule({
         declarations: [HomePage],
         imports: [IonicModule.forRoot()],
-        providers: [{ provider: AuthService, useValue: mockAuthService }],
+        providers: [AuthService],
       }).compileComponents();
 
       fixture = TestBed.createComponent(HomePage);

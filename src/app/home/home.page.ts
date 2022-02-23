@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../shared/data-access/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(private authService: AuthService) {}
 
-  constructor() {}
-
+  login() {
+    this.authService.loginWithGoogle();
+  }
 }
