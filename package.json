@@ -50,6 +50,7 @@
     "@briebug/jest-schematic": "^4.0.0",
     "@capacitor/cli": "3.4.1",
     "@cypress/schematic": "^1.6.0",
+    "@hirez_io/observer-spy": "^2.1.2",
     "@ionic/angular-toolkit": "^5.0.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/jest": "latest",
