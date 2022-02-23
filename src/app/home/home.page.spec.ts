@@ -1,5 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
+import { IonicModule, NavController } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { AuthService } from '../shared/data-access/auth.service';
@@ -18,7 +24,15 @@ describe('HomePage', () => {
       TestBed.configureTestingModule({
         declarations: [HomePage],
         imports: [IonicModule.forRoot()],
-        providers: [AuthService],
+        providers: [
+          AuthService,
+          {
+            provide: NavController,
+            useValue: {
+              navigateForward: jest.fn(),
+            },
+          },
+        ],
       }).compileComponents();
 
       fixture = TestBed.createComponent(HomePage);
@@ -31,7 +45,7 @@ describe('HomePage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should trigger authentication process with google', () => {
+  it('login() should trigger authentication process with google', () => {
     const authService =
       fixture.debugElement.injector.get<AuthService>(AuthService);
 
@@ -39,4 +53,15 @@ describe('HomePage', () => {
 
     expect(authService.loginWithGoogle).toHaveBeenCalled();
   });
+
+  it('login() should trigger navigation to clients route after authentication', fakeAsync(() => {
+    const navCtrl =
+      fixture.debugElement.injector.get<NavController>(NavController);
+
+    component.login();
+
+    tick();
+
+    expect(navCtrl.navigateForward).toHaveBeenCalledWith('/clients');
+  }));
 });
