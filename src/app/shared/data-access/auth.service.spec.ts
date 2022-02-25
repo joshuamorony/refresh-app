@@ -25,34 +25,68 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('loginWithGoogle() should launch a sign in pop up window with google', () => {
-    jest.spyOn(AngularFireAuth, 'signInWithPopup');
+  describe('loginWithGoogle()', () => {
+    it('should launch a sign in pop up window with google', () => {
+      jest
+        .spyOn(AngularFireAuth, 'signInWithPopup')
+        .mockReturnValue(Promise.resolve(null));
 
-    service.loginWithGoogle();
+      service.loginWithGoogle();
 
-    expect(AngularFireAuth.signInWithPopup).toHaveBeenCalledWith(
-      auth,
-      new AngularFireAuth.GoogleAuthProvider()
-    );
+      expect(AngularFireAuth.signInWithPopup).toHaveBeenCalledWith(
+        auth,
+        new AngularFireAuth.GoogleAuthProvider()
+      );
+    });
+
+    it('should emit resolved value from signInWithPopup', fakeAsync(() => {
+      const testValue = 'success';
+
+      jest
+        .spyOn(AngularFireAuth, 'signInWithPopup')
+        .mockReturnValue(Promise.resolve(testValue as any));
+
+      const observerSpy = subscribeSpyTo(service.loginWithGoogle());
+
+      tick();
+
+      expect(observerSpy.getLastValue()).toEqual(testValue);
+    }));
+
+    it('should error if signInWithPopup fails', fakeAsync(() => {
+      jest
+        .spyOn(AngularFireAuth, 'signInWithPopup')
+        .mockReturnValue(Promise.reject());
+
+      const observerSpy = subscribeSpyTo(service.loginWithGoogle(), {
+        expectErrors: true,
+      });
+
+      tick();
+
+      expect(observerSpy.receivedError()).toBe(true);
+    }));
   });
 
-  it('getLoggedIn() should emit a value when a user authenticates successfully', fakeAsync(() => {
-    jest.spyOn(AngularFireAuth, 'authState').mockReturnValue(of({} as any));
+  describe('getLoggedIn()', () => {
+    it('should emit a value when a user authenticates successfully', fakeAsync(() => {
+      jest.spyOn(AngularFireAuth, 'authState').mockReturnValue(of({} as any));
 
-    const observerSpy = subscribeSpyTo(service.getLoggedIn());
+      const observerSpy = subscribeSpyTo(service.getLoggedIn());
 
-    tick();
+      tick();
 
-    expect(observerSpy.getLastValue()).toBeTruthy();
-  }));
+      expect(observerSpy.getLastValue()).toBeTruthy();
+    }));
 
-  it('getLoggedIn() should not emit a value if the user has not authenticated successfully', fakeAsync(() => {
-    jest.spyOn(AngularFireAuth, 'authState').mockReturnValue(of(null));
+    it('should emit a value null value if the user has not authenticated successfully', fakeAsync(() => {
+      jest.spyOn(AngularFireAuth, 'authState').mockReturnValue(of(null));
 
-    const observerSpy = subscribeSpyTo(service.getLoggedIn());
+      const observerSpy = subscribeSpyTo(service.getLoggedIn());
 
-    tick();
+      tick();
 
-    expect(observerSpy.getValuesLength()).toEqual(0);
-  }));
+      expect(observerSpy.getLastValue()).toBe(null);
+    }));
+  });
 });

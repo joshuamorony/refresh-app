@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   authState,
-  signInWithPopup,
   GoogleAuthProvider,
+  signInWithPopup,
 } from '@angular/fire/auth';
-import { filter } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,10 @@ export class AuthService {
   constructor(private auth: Auth) {}
 
   getLoggedIn() {
-    return authState(this.auth).pipe(filter((user) => !!user));
+    return authState(this.auth);
   }
 
   loginWithGoogle() {
-    signInWithPopup(this.auth, new GoogleAuthProvider());
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
   }
 }
