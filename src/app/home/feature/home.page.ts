@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HomeStore } from './data-access/home.store';
+import { HomeStore } from '../data-access/home.store';
 
 @Component({
   selector: 'app-home',

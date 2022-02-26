@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { HomeStore } from './data-access/home.store';
+import { HomeStore } from '../data-access/home.store';
 
 import { HomePage } from './home.page';
 
