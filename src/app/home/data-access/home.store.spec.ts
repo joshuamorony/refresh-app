@@ -1,6 +1,7 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { of } from 'rxjs';
+import { NavController } from '@ionic/angular';
+import { of, throwError } from 'rxjs';
 import { AuthService } from '../../shared/data-access/auth.service';
 import { HomeStore } from './home.store';
 
@@ -9,64 +10,80 @@ jest.mock('../../shared/data-access/auth.service');
 describe('HomeStore', () => {
   let service: HomeStore;
   let authService: AuthService;
+  let navCtrl: NavController;
 
   beforeEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
 
     TestBed.configureTestingModule({
-      providers: [HomeStore, AuthService],
+      providers: [
+        HomeStore,
+        AuthService,
+        {
+          provide: NavController,
+          useValue: {
+            navigateForward: jest.fn(),
+          },
+        },
+      ],
     });
     service = TestBed.inject(HomeStore);
     authService = TestBed.inject(AuthService);
+    navCtrl = TestBed.inject(NavController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('login selector should initially return: pending', () => {
-    const status$ = service.select((state) => state.loginStatus);
-
-    const observerSpy = subscribeSpyTo(status$);
-
-    expect(observerSpy.getFirstValue()).toBe('pending');
+  describe('selector: loginStatus$', () => {
+    it('should initially return: pending', () => {
+      const observerSpy = subscribeSpyTo(service.loginStatus$);
+      expect(observerSpy.getFirstValue()).toBe('pending');
+    });
   });
 
-  //   it('login effect should change state to authenticating once triggered', () => {
-  //     const status$ = service.select((state) => state.loginStatus);
-  //     const observerSpy = subscribeSpyTo(status$);
+  describe('effect: login', () => {
+    it('should change state to authenticating once triggered', () => {
+      const status$ = service.select((state) => state.loginStatus);
+      const observerSpy = subscribeSpyTo(status$);
 
-  //     service.login();
+      service.login();
 
-  //     expect(observerSpy.getLastValue()).toBe('authenticating');
-  //   });
+      expect(observerSpy.getValueAt(1)).toBe('authenticating');
+    });
 
-  //   it('login effect should change state to success once loginWithGoogle resolves', fakeAsync(() => {
-  //     const status$ = service.select((state) => state.loginStatus);
-  //     const observerSpy = subscribeSpyTo(status$);
+    it('should change state to success once loginWithGoogle emits', () => {
+      const status$ = service.select((state) => state.loginStatus);
+      const observerSpy = subscribeSpyTo(status$);
 
-  //     jest.spyOn(authService, 'loginWithGoogle').mockResolvedValue({} as any);
+      jest.spyOn(authService, 'loginWithGoogle').mockReturnValue(of({} as any));
 
-  //     service.login();
+      service.login();
 
-  //     tick();
+      expect(observerSpy.getLastValue()).toBe('success');
+    });
 
-  //     console.info(observerSpy.getValues());
+    it('should change state to error if loginWithGoogle errors', () => {
+      const status$ = service.select((state) => state.loginStatus);
+      const observerSpy = subscribeSpyTo(status$);
 
-  //     expect(observerSpy.getLastValue()).toBe('success');
-  //   }));
+      jest
+        .spyOn(authService, 'loginWithGoogle')
+        .mockReturnValue(throwError('fail'));
 
-  //   it('login effect should change state to error if getLoggedIn emits a null response', () => {
-  //     const status$ = service.select((state) => state.loginStatus);
-  //     const observerSpy = subscribeSpyTo(status$);
+      service.login();
 
-  //     (authService.getLoggedIn as jest.Mock).mockReturnValue(of(null));
+      expect(observerSpy.getLastValue()).toBe('error');
+    });
 
-  //     service.login();
+    it('should navigate to clients route once loginWithGoogle emits', () => {
+      jest.spyOn(authService, 'loginWithGoogle').mockReturnValue(of({} as any));
 
-  //     expect(observerSpy.getLastValue()).toBe('error');
-  //   });
+      service.login();
 
-  //   it('login effect should change state to error if the observable stream errors', () => {});
+      expect(navCtrl.navigateForward).toHaveBeenCalledWith('/clients');
+    });
+  });
 });

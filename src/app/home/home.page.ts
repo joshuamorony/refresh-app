@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '../shared/data-access/auth.service';
+import { HomeStore } from './data-access/home.store';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  providers: [HomeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
-  constructor(private authService: AuthService) {}
+  constructor(private homeStore: HomeStore) {}
 
   login() {
-    this.authService.loginWithGoogle();
+    this.homeStore.login();
   }
 }

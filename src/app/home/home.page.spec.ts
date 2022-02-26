@@ -1,16 +1,8 @@
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
-import { IonicModule, NavController } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
+import { HomeStore } from './data-access/home.store';
 
 import { HomePage } from './home.page';
-import { AuthService } from '../shared/data-access/auth.service';
-
-jest.mock('../shared/data-access/auth.service');
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -24,16 +16,13 @@ describe('HomePage', () => {
       TestBed.configureTestingModule({
         declarations: [HomePage],
         imports: [IonicModule.forRoot()],
-        providers: [
-          AuthService,
-          {
-            provide: NavController,
-            useValue: {
-              navigateForward: jest.fn(),
-            },
-          },
-        ],
       }).compileComponents();
+
+      TestBed.overrideProvider(HomeStore, {
+        useValue: {
+          login: jest.fn(),
+        },
+      });
 
       fixture = TestBed.createComponent(HomePage);
       component = fixture.componentInstance;
@@ -45,23 +34,12 @@ describe('HomePage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('login() should trigger authentication process with google', () => {
-    const authService =
-      fixture.debugElement.injector.get<AuthService>(AuthService);
+  describe('login()', () => {
+    it('should trigger the login effect', () => {
+      const homeStore = fixture.debugElement.injector.get<HomeStore>(HomeStore);
 
-    component.login();
-
-    expect(authService.loginWithGoogle).toHaveBeenCalled();
+      component.login();
+      expect(homeStore.login).toHaveBeenCalled();
+    });
   });
-
-  it('login() should trigger navigation to clients route after authentication', fakeAsync(() => {
-    const navCtrl =
-      fixture.debugElement.injector.get<NavController>(NavController);
-
-    component.login();
-
-    tick();
-
-    expect(navCtrl.navigateForward).toHaveBeenCalledWith('/clients');
-  }));
 });

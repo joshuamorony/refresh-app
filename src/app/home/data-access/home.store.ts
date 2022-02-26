@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { ComponentStore } from '@ngrx/component-store';
-import { of } from 'rxjs';
 import { exhaustMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../shared/data-access/auth.service';
 
@@ -14,24 +14,31 @@ const defaultState: HomeState = {
 
 @Injectable()
 export class HomeStore extends ComponentStore<HomeState> {
+  loginStatus$ = this.select((state) => state.loginStatus);
+
   login = this.effect(($) =>
     $.pipe(
       tap(() => {
-        console.info('here');
         this.setState({ loginStatus: 'authenticating' });
       }),
-      exhaustMap(async () =>
-        of(await this.authService.loginWithGoogle()).pipe(
-          tap((user) => {
-            console.info('here2');
-            this.setState({ loginStatus: 'success' });
+      exhaustMap(() =>
+        this.authService.loginWithGoogle().pipe(
+          tap({
+            next: () => {
+              this.setState({ loginStatus: 'success' });
+              this.navCtrl.navigateForward('/clients');
+            },
+            error: () => this.setState({ loginStatus: 'error' }),
           })
         )
       )
     )
   );
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private navCtrl: NavController
+  ) {
     super(defaultState);
   }
 }
