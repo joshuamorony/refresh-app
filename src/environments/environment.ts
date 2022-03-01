@@ -12,7 +12,8 @@ export const environment = {
     authDomain: 'refresh-module.firebaseapp.com',
     messagingSenderId: '746470688865',
   },
-  production: false
+  production: false,
+  useEmulators: true,
 };
 
 /*

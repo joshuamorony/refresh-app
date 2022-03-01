@@ -41,3 +41,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
+import 'firebase/compat/firestore';
+import { attachCustomCommands } from 'cypress-firebase';
+import { environment } from '../../src/environments/environment';
+
+firebase.initializeApp(environment.firebase);
+
+const firestoreEmulatorHost = Cypress.env('FIRESTORE_EMULATOR_HOST');
+if (firestoreEmulatorHost) {
+  firebase.firestore().settings({
+    host: firestoreEmulatorHost,
+    ssl: false,
+  });
+}
+
+const authEmulatorHost = Cypress.env('FIREBASE_AUTH_EMULATOR_HOST');
+if (authEmulatorHost) {
+  firebase.auth().useEmulator(`http://${authEmulatorHost}/`);
+}
+
+attachCustomCommands({ Cypress, cy, firebase });
