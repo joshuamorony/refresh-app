@@ -5,7 +5,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from '@angular/fire/auth';
-import { from } from 'rxjs';
+import { from, of } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,13 @@ export class AuthService {
   }
 
   loginWithGoogle() {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
+    return this.getLoggedIn().pipe(
+      first(),
+      switchMap((user) =>
+        user
+          ? of(user)
+          : from(signInWithPopup(this.auth, new GoogleAuthProvider()))
+      )
+    );
   }
 }

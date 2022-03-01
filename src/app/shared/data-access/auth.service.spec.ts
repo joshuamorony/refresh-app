@@ -31,7 +31,7 @@ describe('AuthService', () => {
         .spyOn(AngularFireAuth, 'signInWithPopup')
         .mockReturnValue(Promise.resolve(null));
 
-      service.loginWithGoogle();
+      const observerSpy = subscribeSpyTo(service.loginWithGoogle());
 
       expect(AngularFireAuth.signInWithPopup).toHaveBeenCalledWith(
         auth,
@@ -66,6 +66,32 @@ describe('AuthService', () => {
 
       expect(observerSpy.receivedError()).toBe(true);
     }));
+
+    it('should not call signInWithPopup if the user is already authenticated', () => {
+      const testValue = 'success';
+
+      const signInWithPopupSpy = jest.spyOn(AngularFireAuth, 'signInWithPopup');
+
+      jest
+        .spyOn(AngularFireAuth, 'authState')
+        .mockReturnValue(of(testValue) as any);
+
+      const observerSpy = subscribeSpyTo(service.loginWithGoogle());
+
+      expect(signInWithPopupSpy).not.toHaveBeenCalled();
+    });
+
+    it('should emit value from authState if the user is already authenticated', () => {
+      const testValue = 'success';
+
+      jest
+        .spyOn(AngularFireAuth, 'authState')
+        .mockReturnValue(of(testValue) as any);
+
+      const observerSpy = subscribeSpyTo(service.loginWithGoogle());
+
+      expect(observerSpy.getLastValue()).toBe(testValue);
+    });
   });
 
   describe('getLoggedIn()', () => {
