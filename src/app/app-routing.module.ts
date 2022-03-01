@@ -12,6 +12,13 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'clients',
+    loadChildren: () =>
+      import('./clients/feature/client-shell/client-shell.module').then(
+        (m) => m.ClientShellModule
+      ),
+  },
 ];
 
 @NgModule({
