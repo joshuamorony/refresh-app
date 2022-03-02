@@ -18,9 +18,11 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: npm run e2e:ci
+          start: npm start
           wait-on: "http://localhost:4200"
         env:
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
+          FIREBASE_AUTH_EMULATOR_HOST: 9099
+          FIRESTORE_EMULATOR_HOST: 8080
       - name: Jest run
         run: ng test
