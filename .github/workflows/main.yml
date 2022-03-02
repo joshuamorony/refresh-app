@@ -21,5 +21,7 @@ jobs:
           build: npm run build
           start: npm start
           wait-on: "http://localhost:4200"
+        env:
+          CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
       - name: Jest run
         run: ng test
