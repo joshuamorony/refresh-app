@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "firebase emulators:exec --ui --import=./firebase-data 'ionic serve'",
+    "start": "firebase emulators:exec --ui --import=./firebase-data 'ng serve'",
     "build": "ng build",
     "test": "ng test --watch-all",
     "test:rules": "firebase emulators:exec 'jest test --config=firebase.jest.config.js --detectOpenHandles --forceExit'",
