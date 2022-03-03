@@ -8,6 +8,7 @@
     "start": "firebase emulators:exec --ui --import=./firebase-data 'ng serve'",
     "build": "ng build",
     "test": "ng test --watch-all",
+    "test:ci": "ng test",
     "test:rules": "firebase emulators:exec 'jest test --config=firebase.jest.config.js --detectOpenHandles --forceExit'",
     "lint": "ng lint",
     "e2e": "cross-env FIREBASE_AUTH_EMULATOR_HOST=9099 FIRESTORE_EMULATOR_HOST=8080 firebase emulators:exec --ui --import=./firebase-data 'ng e2e'",
