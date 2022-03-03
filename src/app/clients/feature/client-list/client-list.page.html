@@ -4,4 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ion-list data-test="list">
+    <ion-item *ngFor="let client of clientStore.getClients() | async">
+      <ion-label>{{client.name.first}} {{client.name.last}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
