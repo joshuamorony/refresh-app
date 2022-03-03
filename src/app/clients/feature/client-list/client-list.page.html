@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list data-test="list">
-    <ion-item *ngFor="let client of clientStore.getClients() | async">
+    <ion-item *ngFor="let client of clientsStore.clients$ | async">
       <ion-label>{{client.name.first}} {{client.name.last}}</ion-label>
     </ion-item>
   </ion-list>
