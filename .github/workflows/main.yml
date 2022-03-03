@@ -18,7 +18,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          start: npm run e2e
           wait-on: "http://localhost:4200"
         env:
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
