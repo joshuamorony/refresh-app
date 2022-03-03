@@ -26,3 +26,5 @@ jobs:
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Jest run
         run: npm run test:ci
+      - name: Firestore security rules
+        run: npm run test:rules
