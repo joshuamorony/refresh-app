@@ -26,4 +26,8 @@ describe('ClientsStore', () => {
       expect(observerSpy.getFirstValue()).toEqual([]);
     });
   });
+
+  describe('effect: loadClients()', () => {
+    it('should update clients state with stream from getClients()', () => {});
+  });
 });
