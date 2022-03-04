@@ -27,4 +27,10 @@ export interface ClientsState {
 @Injectable({
   providedIn: ClientShellModule,
 })
-export class ClientsStore extends ComponentStore<ClientsState> {}
+export class ClientsStore extends ComponentStore<ClientsState> {
+  readonly clients$ = this.select((state) => state.clients);
+
+  constructor() {
+    super({ clients: [] });
+  }
+}

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { ClientsStore } from './clients.store';
 
 describe('ClientsStore', () => {
@@ -20,6 +21,9 @@ describe('ClientsStore', () => {
   });
 
   describe('selector: clients$', () => {
-    it('should return empty array by default', () => {});
+    it('should return empty array by default', () => {
+      const observerSpy = subscribeSpyTo(service.clients$);
+      expect(observerSpy.getFirstValue()).toEqual([]);
+    });
   });
 });
