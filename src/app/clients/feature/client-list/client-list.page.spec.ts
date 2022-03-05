@@ -4,8 +4,6 @@ import { ClientsStore } from '../../data-access/clients.store';
 
 import { ClientListPage } from './client-list.page';
 
-jest.doMock('../../data-access/clients.store');
-
 describe('ClientListPage', () => {
   let component: ClientListPage;
   let fixture: ComponentFixture<ClientListPage>;
@@ -15,7 +13,12 @@ describe('ClientListPage', () => {
       TestBed.configureTestingModule({
         declarations: [ClientListPage],
         imports: [IonicModule.forRoot()],
-        providers: [ClientsStore],
+        providers: [
+          {
+            provide: ClientsStore,
+            useValue: jest.doMock('../../data-access/clients.store'),
+          },
+        ],
       }).compileComponents();
 
       fixture = TestBed.createComponent(ClientListPage);

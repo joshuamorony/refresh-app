@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { of } from 'rxjs';
-import { first, take, tap } from 'rxjs/operators';
+import { first, switchMap, tap } from 'rxjs/operators';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
+import { ClientsService } from './clients.service';
 
 interface ClientName {
   first: string;
@@ -32,9 +32,20 @@ export interface ClientsState {
 export class ClientsStore extends ComponentStore<ClientsState> {
   readonly clients$ = this.select((state) => state.clients);
 
-  loadClients = this.effect(($) => $);
+  loadClients = this.effect(($) =>
+    $.pipe(
+      first(),
+      switchMap(() =>
+        this.clientsService.getClients().pipe(
+          tap({
+            next: (clients) => this.patchState({ clients }),
+          })
+        )
+      )
+    )
+  );
 
-  constructor() {
+  constructor(private clientsService: ClientsService) {
     super({ clients: [] });
   }
 }
