@@ -14,7 +14,7 @@ describe('ClientsStore', () => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
 
-    (ClientsService as jest.Mock<ClientsService>).mockImplementation(() => ({
+    (ClientsService as jest.Mock).mockImplementation(() => ({
       getClients: jest.fn().mockReturnValue(of([])),
     }));
 
@@ -41,7 +41,9 @@ describe('ClientsStore', () => {
     it('should update clients state with stream from getClients()', () => {
       const testValue = ['123'];
 
-      jest.spyOn(clientsService, 'getClients').mockReturnValue(of(testValue));
+      jest
+        .spyOn(clientsService, 'getClients')
+        .mockReturnValue(of(testValue as any));
 
       const observerSpy = subscribeSpyTo(service.clients$);
 
