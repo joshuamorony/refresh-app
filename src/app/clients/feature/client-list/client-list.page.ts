@@ -10,5 +10,7 @@ import { ClientsStore } from '../../data-access/clients.store';
 export class ClientListPage implements OnInit {
   constructor(public clientsStore: ClientsStore) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.clientsStore.loadClients();
+  }
 }

@@ -13,13 +13,13 @@ describe('ClientListPage', () => {
       TestBed.configureTestingModule({
         declarations: [ClientListPage],
         imports: [IonicModule.forRoot()],
-        providers: [
-          {
-            provide: ClientsStore,
-            useValue: jest.doMock('../../data-access/clients.store'),
-          },
-        ],
       }).compileComponents();
+
+      TestBed.overrideProvider(ClientsStore, {
+        useValue: {
+          loadClients: jest.fn(),
+        },
+      });
 
       fixture = TestBed.createComponent(ClientListPage);
       component = fixture.componentInstance;
@@ -29,5 +29,12 @@ describe('ClientListPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call loadClients() when initialised', () => {
+    const clientsStore =
+      fixture.debugElement.injector.get<ClientsStore>(ClientsStore);
+    component.ngOnInit();
+    expect(clientsStore.loadClients).toHaveBeenCalled();
   });
 });
