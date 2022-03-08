@@ -4,8 +4,6 @@ describe('Clients', () => {
   const testDocId = 'abc123';
 
   beforeEach(() => {
-    cy.callFirestore('delete', 'clients');
-
     cy.login();
     cy.visit('/clients');
   });
@@ -20,5 +18,9 @@ describe('Clients', () => {
 
     const listOfClients = getItemsInList();
     listOfClients.should('contain.text', 'Josh Morony');
+  });
+
+  afterEach(() => {
+    cy.callFirestore('delete', 'clients');
   });
 });

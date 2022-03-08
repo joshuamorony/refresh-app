@@ -6,13 +6,15 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp, getApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import {
+  initializeFirestore,
   provideFirestore,
-  getFirestore,
   connectFirestoreEmulator,
+  getFirestore,
+  Firestore,
 } from '@angular/fire/firestore';
 
 @NgModule({
@@ -23,6 +25,21 @@ import {
     IonicModule.forRoot(),
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => {
+      let firestore: Firestore;
+
+      if (environment.useEmulators) {
+        // Long polling required for Cypress
+        firestore = initializeFirestore(getApp(), {
+          experimentalForceLongPolling: true,
+        });
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      } else {
+        firestore = getFirestore();
+      }
+
+      return firestore;
+    }),
     provideAuth(() => {
       const auth = getAuth();
       if (environment.useEmulators) {
@@ -31,13 +48,6 @@ import {
         });
       }
       return auth;
-    }),
-    provideFirestore(() => {
-      const firestore = getFirestore();
-      if (environment.useEmulators) {
-        connectFirestoreEmulator(firestore, 'localhost', 8080);
-      }
-      return firestore;
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
