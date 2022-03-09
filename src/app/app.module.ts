@@ -33,6 +33,9 @@ import {
         // firestore = initializeFirestore(getApp(), {
         //   experimentalForceLongPolling: true,
         // });
+
+        firestore = getFirestore(); // remove
+
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       } else {
         firestore = getFirestore();
