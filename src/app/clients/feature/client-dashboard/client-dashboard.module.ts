@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ClientListPageRoutingModule } from './client-list-routing.module';
+import { ClientDashboardPageRoutingModule } from './client-dashboard-routing.module';
 
-import { ClientListPage } from './client-list.page';
+import { ClientDashboardPage } from './client-dashboard.page';
 import { ClientListComponentModule } from '../../ui/client-list/client-list.component.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ClientListComponentModule } from '../../ui/client-list/client-list.comp
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientListPageRoutingModule,
+    ClientDashboardPageRoutingModule,
     ClientListComponentModule,
   ],
-  declarations: [ClientListPage],
+  declarations: [ClientDashboardPage],
 })
-export class ClientListPageModule {}
+export class ClientDashboardPageModule {}
