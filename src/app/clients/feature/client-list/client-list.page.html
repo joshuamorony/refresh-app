@@ -4,4 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <app-client-list-view
+    *ngIf="clientsStore.clients$ | async as clients"
+    [clients]="clients"
+  ></app-client-list-view>
+</ion-content>
