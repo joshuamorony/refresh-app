@@ -5,9 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list data-test="list">
-    <ion-item *ngFor="let client of clientsStore.clients$ | async">
-      <ion-label>{{client.name.first}} {{client.name.last}}</ion-label>
-    </ion-item>
-  </ion-list>
+  <app-client-list-view
+    *ngIf="clientsStore.clients$ | async as clients"
+    [clients]="clients"
+  ></app-client-list-view>
 </ion-content>
