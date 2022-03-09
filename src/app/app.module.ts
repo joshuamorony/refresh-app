@@ -30,11 +30,9 @@ import {
 
       if (environment.useEmulators) {
         // Long polling required for Cypress
-        // firestore = initializeFirestore(getApp(), {
-        //   experimentalForceLongPolling: true,
-        // });
-
-        firestore = getFirestore(); // remove
+        firestore = initializeFirestore(getApp(), {
+          experimentalForceLongPolling: true,
+        });
 
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       } else {
