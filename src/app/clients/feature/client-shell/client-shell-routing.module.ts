@@ -5,8 +5,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../client-list/client-list.module').then(
-        (m) => m.ClientListPageModule
+      import('../client-dashboard/client-dashboard.module').then(
+        (m) => m.ClientDashboardPageModule
       ),
   },
 ];

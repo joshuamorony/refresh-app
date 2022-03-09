@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <app-client-list-view
+  <app-client-list
     *ngIf="clientsStore.clients$ | async as clients"
     [clients]="clients"
-  ></app-client-list-view>
+  ></app-client-list>
 </ion-content>

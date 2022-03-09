@@ -2,16 +2,16 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ClientsStore } from '../../data-access/clients.store';
 
-import { ClientListPage } from './client-list.page';
+import { ClientDashboardPage } from './client-dashboard.page';
 
-describe('ClientListPage', () => {
-  let component: ClientListPage;
-  let fixture: ComponentFixture<ClientListPage>;
+describe('ClientDashboardPage', () => {
+  let component: ClientDashboardPage;
+  let fixture: ComponentFixture<ClientDashboardPage>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ClientListPage],
+        declarations: [ClientDashboardPage],
         imports: [IonicModule.forRoot()],
       }).compileComponents();
 
@@ -21,7 +21,7 @@ describe('ClientListPage', () => {
         },
       });
 
-      fixture = TestBed.createComponent(ClientListPage);
+      fixture = TestBed.createComponent(ClientDashboardPage);
       component = fixture.componentInstance;
       fixture.detectChanges();
     })
