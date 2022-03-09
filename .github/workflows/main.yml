@@ -23,7 +23,7 @@ jobs:
           wait-on: "http://localhost:4200"
         env:
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
-          CYPRESS_TEST_UID: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           FIREBASE_AUTH_EMULATOR_HOST: "localhost:9099"
           FIRESTORE_EMULATOR_HOST: "localhost:8080"
       - name: Jest run
