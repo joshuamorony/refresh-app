@@ -55,7 +55,6 @@ const firestoreEmulatorHost = Cypress.env('FIRESTORE_EMULATOR_HOST');
 if (firestoreEmulatorHost) {
   firebase.firestore().settings({
     host: firestoreEmulatorHost,
-    experimentalForceLongPolling: true,
     ssl: false,
   });
 }

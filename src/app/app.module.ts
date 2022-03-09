@@ -34,7 +34,7 @@ import {
           experimentalForceLongPolling: true,
         });
 
-        connectFirestoreEmulator(firestore, 'localhost', 8080);
+        connectFirestoreEmulator(firestore, 'http://localhost', 8080);
       } else {
         firestore = getFirestore();
       }
