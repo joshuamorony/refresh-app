@@ -60,8 +60,10 @@ firebase.initializeApp({
 });
 
 const firestoreEmulatorHost = Cypress.env('FIRESTORE_EMULATOR_HOST');
-console.log('!!!!!!!!!!!!!!!!!!!!!!!');
-console.log(firestoreEmulatorHost);
+
+console.debug('!!!!!!!!!!!!!!!!!!!!');
+console.debug(firestoreEmulatorHost);
+
 if (firestoreEmulatorHost) {
   firebase.firestore().settings({
     host: firestoreEmulatorHost,
