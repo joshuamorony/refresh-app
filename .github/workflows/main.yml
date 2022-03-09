@@ -24,7 +24,7 @@ jobs:
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           FIREBASE_AUTH_EMULATOR_HOST: "localhost:9099"
-          FIRESTORE_EMULATOR_HOST: "localhost:8080"
+          FIRESTORE_EMULATOR_HOST: "8080"
       - name: Jest run
         run: npm run test:ci
       - name: Firestore security rules
