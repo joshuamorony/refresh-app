@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "cross-env FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIRESTORE_EMULATOR_HOST=localhost:8080 firebase emulators:exec --ui --import=./firebase-data 'ng serve'",
+    "start": "firebase emulators:exec --ui --import=./firebase-data 'ng serve'",
     "build": "ng build",
     "test": "ng test --watch-all",
     "test:ci": "ng test",
