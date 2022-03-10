@@ -5,6 +5,7 @@ const cypressFirebasePlugin = require('cypress-firebase').plugin;
 
 module.exports = (on, config) => {
   const extendedConfig = cypressFirebasePlugin(on, config, admin);
+  require('cypress-log-to-output').install(on);
 
   // Add other plugins/tasks such as code coverage here
 
