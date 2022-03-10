@@ -11,6 +11,9 @@ export const environment = {
     apiKey: 'AIzaSyAaxXgeaupPhuK3jMjqtaaQzetd-y6cIN8',
     authDomain: 'refresh-module.firebaseapp.com',
     messagingSenderId: '746470688865',
+    credentials: {
+      projectId: 'demo-project',
+    },
   },
   production: false,
   useEmulators: true,
