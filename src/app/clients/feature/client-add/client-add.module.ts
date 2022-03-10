@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ClientAddPageRoutingModule } from './client-add-routing.module';
 
 import { ClientAddPage } from './client-add.page';
+import { ClientEditorComponentModule } from '../../ui/client-editor/client-editor.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientAddPageRoutingModule
+    ClientAddPageRoutingModule,
+    ClientEditorComponentModule,
   ],
-  declarations: [ClientAddPage]
+  declarations: [ClientAddPage],
 })
 export class ClientAddPageModule {}

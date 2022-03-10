@@ -1,3 +1,33 @@
-<p>
-  client-editor works!
-</p>
+<form>
+  <ion-item>
+    <ion-label position="floating">First Name</ion-label>
+    <ion-input
+      data-test="first-name-input"
+      type="text"
+      class="first-name"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Last Name</ion-label>
+    <ion-input
+      data-test="last-name-input"
+      type="text"
+      class="last-name"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input data-test="email-input" type="email" class="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Phone</ion-label>
+    <ion-input data-test="phone-input" type="tel" class="phone"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Notes</ion-label>
+    <ion-textarea data-test="notes-input" class="notes"></ion-textarea>
+  </ion-item>
+  <ion-button data-test="save-client-button" class="save" type="submit">
+    Save
+  </ion-button>
+</form>
