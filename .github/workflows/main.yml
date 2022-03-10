@@ -19,6 +19,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
+          browser: chrome
           wait-on: "http://localhost:4200"
         env:
           CYPRESS_TEST_UID: ${{ secrets.TEST_UID }}
