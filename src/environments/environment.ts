@@ -4,7 +4,7 @@
 
 export const environment = {
   firebase: {
-    projectId: 'refresh-module',
+    projectId: 'demo-project',
     appId: '1:746470688865:web:88951d2ab0275b0575c220',
     storageBucket: 'refresh-module.appspot.com',
     locationId: 'us-central',
