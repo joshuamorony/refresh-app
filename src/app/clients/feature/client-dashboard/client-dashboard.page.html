@@ -1,6 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title data-test="page-title">Clients</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        data-test="add-client-button"
+        routerLink="/add"
+        routerDirection="forward"
+      >
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
