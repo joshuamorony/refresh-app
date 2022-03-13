@@ -1,33 +1,42 @@
-<form>
+<form [formGroup]="formGroup" (ngSubmit)="save.emit(true)">
   <ion-item>
     <ion-label position="floating">First Name</ion-label>
     <ion-input
+      formControlName="firstName"
       data-test="first-name-input"
       type="text"
-      class="first-name"
     ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Last Name</ion-label>
     <ion-input
+      formControlName="lastName"
       data-test="last-name-input"
       type="text"
-      class="last-name"
     ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Email</ion-label>
-    <ion-input data-test="email-input" type="email" class="email"></ion-input>
+    <ion-input
+      formControlName="email"
+      data-test="email-input"
+      type="email"
+    ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Phone</ion-label>
-    <ion-input data-test="phone-input" type="tel" class="phone"></ion-input>
+    <ion-input
+      formControlName="phone"
+      data-test="phone-input"
+      type="tel"
+    ></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Notes</ion-label>
-    <ion-textarea data-test="notes-input" class="notes"></ion-textarea>
+    <ion-textarea
+      formControlName="notes"
+      data-test="notes-input"
+    ></ion-textarea>
   </ion-item>
-  <ion-button data-test="save-client-button" class="save" type="submit">
-    Save
-  </ion-button>
+  <ion-button data-test="save-client-button" type="submit"> Save </ion-button>
 </form>

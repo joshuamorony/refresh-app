@@ -5,5 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <app-client-editor></app-client-editor>
+  <app-client-editor
+    [formGroup]="clientForm"
+    (save)="saveClient()"
+  ></app-client-editor>
 </ion-content>
