@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ClientsStore } from '../../data-access/clients.store';
 
 import { ClientDashboardPage } from './client-dashboard.page';
@@ -12,7 +13,7 @@ describe('ClientDashboardPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ClientDashboardPage],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), RouterTestingModule],
       }).compileComponents();
 
       TestBed.overrideProvider(ClientsStore, {

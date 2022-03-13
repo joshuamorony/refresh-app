@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ClientAdd</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-client-editor
+    [formGroup]="clientForm"
+    (save)="saveClient()"
+  ></app-client-editor>
+</ion-content>

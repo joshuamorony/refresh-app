@@ -9,6 +9,10 @@ const routes: Routes = [
         (m) => m.ClientDashboardPageModule
       ),
   },
+  {
+    path: 'add',
+    loadChildren: () => import('../client-add/client-add.module').then( m => m.ClientAddPageModule)
+  },
 ];
 
 @NgModule({

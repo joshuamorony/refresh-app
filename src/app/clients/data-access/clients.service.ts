@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  addDoc,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Client } from './clients.store';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
@@ -13,5 +18,12 @@ export class ClientsService {
   public getClients() {
     const clientsCollection = collection(this.firestore, 'clients');
     return collectionData(clientsCollection) as Observable<Client[]>;
+  }
+
+  public addClient(
+    details: Pick<Client, 'name' | 'email' | 'phone' | 'notes'>
+  ) {
+    const clientsCollection = collection(this.firestore, 'clients');
+    addDoc(clientsCollection, details);
   }
 }
