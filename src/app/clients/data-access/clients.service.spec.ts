@@ -48,4 +48,37 @@ describe('ClientsService', () => {
       expect(result).toBe(mockDocumentData);
     });
   });
+
+  describe('addClient()', () => {
+    it('should create a new document in the clients collection using the supplied data', () => {
+      const mockCollectionReference = jest.fn();
+
+      const testClient = {
+        name: {
+          first: 'Josh',
+          last: 'Morony',
+        },
+        email: 'joshua.morony@gmail.com',
+        phone: '444',
+        notes: '',
+      };
+
+      jest
+        .spyOn(AngularFireFirestore, 'collection')
+        .mockReturnValue(mockCollectionReference as any);
+
+      jest.spyOn(AngularFireFirestore, 'addDoc');
+
+      service.addClient(testClient);
+
+      expect(AngularFireFirestore.collection).toHaveBeenCalledWith(
+        {},
+        'clients'
+      );
+      expect(AngularFireFirestore.addDoc).toHaveBeenCalledWith(
+        mockCollectionReference,
+        testClient
+      );
+    });
+  });
 });
