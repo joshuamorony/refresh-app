@@ -14,6 +14,7 @@ interface SurveyResponse {
 }
 
 export interface Client {
+  id?: string;
   name: ClientName;
   email: string;
   phone: string;

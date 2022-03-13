@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { Client } from '../../data-access/clients.store';
 
@@ -14,7 +15,7 @@ describe('ClientListComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ClientListComponent],
-        imports: [IonicModule.forRoot()],
+        imports: [IonicModule.forRoot(), RouterTestingModule],
       })
         .overrideComponent(ClientListComponent, {
           set: { changeDetection: ChangeDetectionStrategy.Default },

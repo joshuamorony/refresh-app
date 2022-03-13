@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('../client-add/client-add.module').then( m => m.ClientAddPageModule)
   },
+  {
+    path: ':id',
+    loadChildren: () => import('../client-detail/client-detail.module').then( m => m.ClientDetailPageModule)
+  },
 ];
 
 @NgModule({

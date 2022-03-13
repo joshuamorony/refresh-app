@@ -40,10 +40,17 @@ describe('ClientsService', () => {
         .mockReturnValue(mockDocumentData as any);
 
       const result = service.getClients();
+      const options = {
+        idField: 'id',
+      };
 
       expect(AngularFireFirestore.collection).toHaveBeenCalledWith(
         {},
         'clients'
+      );
+      expect(AngularFireFirestore.collectionData).toHaveBeenCalledWith(
+        mockCollectionReference,
+        options
       );
       expect(result).toBe(mockDocumentData);
     });
