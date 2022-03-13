@@ -11,8 +11,10 @@ import { ClientsService } from '../../data-access/clients.service';
 })
 export class ClientAddPage {
   clientForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
+    name: this.fb.group({
+      first: [''],
+      last: [''],
+    }),
     phone: [''],
     email: [''],
     notes: [''],

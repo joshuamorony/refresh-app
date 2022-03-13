@@ -25,8 +25,10 @@ describe('ClientEditorComponent', () => {
       component = fixture.componentInstance;
 
       component.formGroup = new FormGroup({
-        firstName: new FormControl(),
-        lastName: new FormControl(),
+        name: new FormGroup({
+          first: new FormControl(),
+          last: new FormControl(),
+        }),
         email: new FormControl(),
         phone: new FormControl(),
         notes: new FormControl(),
@@ -50,25 +52,25 @@ describe('ClientEditorComponent', () => {
   });
 
   describe('@Input: formControl', () => {
-    it('should be bound to firstName input', () => {
+    it('should be bound to first name input', () => {
       const testValue = '123';
 
       const input = fixture.debugElement.query(
         By.css(`[data-test="first-name-input"]`)
       );
 
-      component.formGroup.get('firstName').setValue(testValue);
+      component.formGroup.get('name').get('first').setValue(testValue);
       expect(input.componentInstance.value).toBe(testValue);
     });
 
-    it('should be bound to lastName input', () => {
+    it('should be bound to last name input', () => {
       const testValue = '123';
 
       const input = fixture.debugElement.query(
         By.css(`[data-test="last-name-input"]`)
       );
 
-      component.formGroup.get('lastName').setValue(testValue);
+      component.formGroup.get('name').get('last').setValue(testValue);
       expect(input.componentInstance.value).toBe(testValue);
     });
 

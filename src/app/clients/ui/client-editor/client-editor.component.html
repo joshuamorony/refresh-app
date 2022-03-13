@@ -1,20 +1,22 @@
 <form [formGroup]="formGroup" (ngSubmit)="save.emit(true)">
-  <ion-item>
-    <ion-label position="floating">First Name</ion-label>
-    <ion-input
-      formControlName="firstName"
-      data-test="first-name-input"
-      type="text"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Last Name</ion-label>
-    <ion-input
-      formControlName="lastName"
-      data-test="last-name-input"
-      type="text"
-    ></ion-input>
-  </ion-item>
+  <ng-container formGroupName="name">
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input
+        formControlName="first"
+        data-test="first-name-input"
+        type="text"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input
+        formControlName="last"
+        data-test="last-name-input"
+        type="text"
+      ></ion-input>
+    </ion-item>
+  </ng-container>
   <ion-item>
     <ion-label position="floating">Email</ion-label>
     <ion-input

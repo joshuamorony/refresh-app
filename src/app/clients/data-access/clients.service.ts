@@ -15,5 +15,7 @@ export class ClientsService {
     return collectionData(clientsCollection) as Observable<Client[]>;
   }
 
-  public addClient(details) {}
+  public addClient(
+    details: Pick<Client, 'name' | 'email' | 'phone' | 'notes'>
+  ) {}
 }
