@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { ClientsService } from '../../data-access/clients.service';
 
 @Component({
   selector: 'app-client-add',
@@ -17,10 +18,14 @@ export class ClientAddPage {
     notes: [''],
   });
 
-  constructor(private fb: FormBuilder, private navCtrl: NavController) {}
+  constructor(
+    private fb: FormBuilder,
+    private navCtrl: NavController,
+    private clientsService: ClientsService
+  ) {}
 
   saveClient() {
-    console.log('hi');
+    this.clientsService.addClient(this.clientForm.value);
     this.navCtrl.navigateBack('clients');
   }
 }

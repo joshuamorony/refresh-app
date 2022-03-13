@@ -14,4 +14,6 @@ export class ClientsService {
     const clientsCollection = collection(this.firestore, 'clients');
     return collectionData(clientsCollection) as Observable<Client[]>;
   }
+
+  public addClient(details) {}
 }
