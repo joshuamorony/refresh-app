@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>ClientDetail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="client$ | async as client"
+        routerLink="/clients/{{client.id}}/edit"
+        routerDirection="forward"
+      >
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+<ion-content> </ion-content>
