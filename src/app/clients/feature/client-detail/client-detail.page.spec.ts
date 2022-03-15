@@ -42,6 +42,7 @@ describe('ClientDetailPage', () => {
       TestBed.overrideProvider(ClientsStore, {
         useFactory: jest.fn().mockImplementation(() => ({
           clients$: of([testClient]),
+          loadClients: jest.fn(),
         })),
       });
 
@@ -53,6 +54,13 @@ describe('ClientDetailPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call loadClients() when initialised', () => {
+    const clientsStore =
+      fixture.debugElement.injector.get<ClientsStore>(ClientsStore);
+    component.ngOnInit();
+    expect(clientsStore.loadClients).toHaveBeenCalled();
   });
 
   it('client$ should be a stream of the client matching the id param', () => {

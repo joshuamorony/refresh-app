@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { ClientsStore } from '../../data-access/clients.store';
   styleUrls: ['./client-add.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientAddPage {
+export class ClientAddPage implements OnInit {
   client$ = this.route.paramMap.pipe(
     switchMap((params) =>
       this.clientsStore.clients$.pipe(
@@ -46,6 +46,10 @@ export class ClientAddPage {
     private clientsStore: ClientsStore,
     private route: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.clientsStore.loadClients();
+  }
 
   saveClient(values) {
     const id = this.route.snapshot.paramMap.get('id');
