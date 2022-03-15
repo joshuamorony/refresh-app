@@ -88,4 +88,38 @@ describe('ClientsService', () => {
       );
     });
   });
+
+  describe('updateClient()', () => {
+    it('should update the client document in Firestore with the supplied values', () => {
+      const mockDocumentReference = jest.fn();
+
+      const updatedClient = {
+        id: '123',
+        name: {
+          first: 'Josh',
+          last: 'Morony',
+        },
+        email: 'joshua.morony@gmail.com',
+        phone: '444',
+        notes: '',
+      };
+
+      jest
+        .spyOn(AngularFireFirestore, 'doc')
+        .mockReturnValue(mockDocumentReference as any);
+
+      jest.spyOn(AngularFireFirestore, 'setDoc');
+
+      service.updateClient(updatedClient);
+
+      expect(AngularFireFirestore.doc).toHaveBeenCalledWith(
+        {},
+        `clients/${updatedClient.id}`
+      );
+      expect(AngularFireFirestore.setDoc).toHaveBeenCalledWith(
+        mockDocumentReference,
+        updatedClient
+      );
+    });
+  });
 });

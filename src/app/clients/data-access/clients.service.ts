@@ -4,6 +4,8 @@ import {
   collectionData,
   collection,
   addDoc,
+  doc,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Client } from './clients.store';
@@ -29,5 +31,8 @@ export class ClientsService {
     addDoc(clientsCollection, details);
   }
 
-  public updateClient(details: Client) {}
+  public updateClient(client: Partial<Client> & { id: string }) {
+    const clientDocReference = doc(this.firestore, `clients/${client.id}`);
+    return setDoc(clientDocReference, client);
+  }
 }
