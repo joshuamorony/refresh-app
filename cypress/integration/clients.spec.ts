@@ -17,6 +17,7 @@ describe('Clients', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/clients');
+    cy.callFirestore('delete', 'clients');
   });
 
   it('can see a list of clients', () => {
@@ -63,9 +64,5 @@ describe('Clients', () => {
     getSaveButton().click();
 
     getNameDisplay().should('contain.text', testEditedName);
-  });
-
-  afterEach(() => {
-    cy.callFirestore('delete', 'clients');
   });
 });

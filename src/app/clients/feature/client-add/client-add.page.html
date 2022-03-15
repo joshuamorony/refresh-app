@@ -1,12 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ClientAdd</ion-title>
+    <ion-title>
+      <ng-container *ngIf="{ client: client$ | async } as vm">
+        {{ vm.client ? 'Edit Client' : 'Add Client' }}
+      </ng-container>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-client-editor
+    *ngIf="clientForm$ | async as clientForm"
     [formGroup]="clientForm"
-    (save)="saveClient()"
+    (save)="saveClient(clientForm.value)"
   ></app-client-editor>
 </ion-content>

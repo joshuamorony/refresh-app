@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
@@ -33,9 +33,7 @@ describe('ClientDetailPage', () => {
           {
             provide: ActivatedRoute,
             useValue: {
-              paramMap: of({
-                get: (param: string) => testClient.id,
-              }),
+              paramMap: of(convertToParamMap({ id: testClient.id })),
             },
           },
         ],

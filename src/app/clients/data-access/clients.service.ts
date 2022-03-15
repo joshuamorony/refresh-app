@@ -28,4 +28,6 @@ export class ClientsService {
     const clientsCollection = collection(this.firestore, 'clients');
     addDoc(clientsCollection, details);
   }
+
+  public updateClient(details: Client) {}
 }

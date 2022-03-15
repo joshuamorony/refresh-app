@@ -6,6 +6,7 @@
         *ngIf="client$ | async as client"
         routerLink="/clients/{{client.id}}/edit"
         routerDirection="forward"
+        data-test="edit-button"
       >
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
