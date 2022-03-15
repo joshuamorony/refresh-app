@@ -16,6 +16,11 @@
 
 <ion-content>
   <ng-container *ngIf="client$ | async as client">
-    <h2 data-test="client-name-display">{{client.name.first}}</h2>
+    <h2 data-test="client-name-display">
+      {{client.name.first}} {{client.name.last}}
+    </h2>
+    <p data-test="client-phone-display">{{client.phone}}</p>
+    <p data-test="client-email-display">{{client.email}}</p>
+    <p data-test="client-notes-display">{{client.notes}}</p>
   </ng-container>
 </ion-content>

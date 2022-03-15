@@ -1,12 +1,15 @@
 import {
   getAddClientButton,
   getEditButton,
+  getEmailDisplay,
   getEmailField,
   getFirstNameField,
   getItemsInList,
   getLastNameField,
   getNameDisplay,
+  getNotesDisplay,
   getNotesField,
+  getPhoneDisplay,
   getPhoneField,
   getSaveButton,
 } from '../support/utils';
@@ -64,5 +67,27 @@ describe('Clients', () => {
     getSaveButton().click();
 
     getNameDisplay().should('contain.text', testEditedName);
+  });
+
+  it('can view a specific clients full details', () => {
+    const testClient = {
+      name: {
+        first: 'Josh',
+        last: 'Morony',
+      },
+      phone: '333',
+      email: 'joshua.morony@gmail.com',
+      notes: '',
+    };
+
+    cy.callFirestore('set', 'clients/abc123', testClient);
+
+    getItemsInList().first().click();
+
+    getNameDisplay().should('contain.text', testClient.name.first);
+    getNameDisplay().should('contain.text', testClient.name.last);
+    getPhoneDisplay().should('contain.text', testClient.phone);
+    getEmailDisplay().should('contain.text', testClient.email);
+    getNotesDisplay().should('contain.text', testClient.notes);
   });
 });
