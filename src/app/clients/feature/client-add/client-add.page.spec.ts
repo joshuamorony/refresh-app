@@ -83,6 +83,7 @@ describe('ClientAddPage', () => {
       TestBed.overrideProvider(ClientsStore, {
         useFactory: jest.fn().mockImplementation(() => ({
           clients$: of([testClient]),
+          loadClients: jest.fn(),
         })),
       });
 
@@ -94,6 +95,13 @@ describe('ClientAddPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call loadClients() when initialised', () => {
+    const clientsStore =
+      fixture.debugElement.injector.get<ClientsStore>(ClientsStore);
+    component.ngOnInit();
+    expect(clientsStore.loadClients).toHaveBeenCalled();
   });
 
   describe('adding client', () => {

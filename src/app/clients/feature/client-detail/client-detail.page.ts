@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { ClientsStore } from '../../data-access/clients.store';
@@ -8,7 +8,7 @@ import { ClientsStore } from '../../data-access/clients.store';
   templateUrl: './client-detail.page.html',
   styleUrls: ['./client-detail.page.scss'],
 })
-export class ClientDetailPage {
+export class ClientDetailPage implements OnInit {
   client$ = this.route.paramMap.pipe(
     switchMap((params) =>
       this.clientsStore.clients$.pipe(
@@ -23,4 +23,8 @@ export class ClientDetailPage {
     private route: ActivatedRoute,
     private clientsStore: ClientsStore
   ) {}
+
+  ngOnInit() {
+    this.clientsStore.loadClients();
+  }
 }
