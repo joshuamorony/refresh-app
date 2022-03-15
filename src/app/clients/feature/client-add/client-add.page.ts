@@ -55,10 +55,10 @@ export class ClientAddPage {
         id,
         ...values,
       });
+      this.navCtrl.navigateBack(`clients/${id}`);
     } else {
       this.clientsService.addClient(values);
+      this.navCtrl.navigateBack('clients');
     }
-
-    this.navCtrl.navigateBack('clients');
   }
 }

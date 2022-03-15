@@ -104,6 +104,8 @@ describe('ClientsService', () => {
         notes: '',
       };
 
+      const { id, ...updatedClientWithoutId } = updatedClient;
+
       jest
         .spyOn(AngularFireFirestore, 'doc')
         .mockReturnValue(mockDocumentReference as any);
@@ -118,7 +120,8 @@ describe('ClientsService', () => {
       );
       expect(AngularFireFirestore.setDoc).toHaveBeenCalledWith(
         mockDocumentReference,
-        updatedClient
+        updatedClientWithoutId,
+        { merge: true }
       );
     });
   });

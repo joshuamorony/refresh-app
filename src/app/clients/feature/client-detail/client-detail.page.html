@@ -14,4 +14,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <ng-container *ngIf="client$ | async as client">
+    <h2 data-test="client-name-display">{{client.name.first}}</h2>
+  </ng-container>
+</ion-content>

@@ -33,6 +33,7 @@ export class ClientsService {
 
   public updateClient(client: Partial<Client> & { id: string }) {
     const clientDocReference = doc(this.firestore, `clients/${client.id}`);
-    return setDoc(clientDocReference, client);
+    const { id, ...clientWithoutId } = client;
+    return setDoc(clientDocReference, clientWithoutId, { merge: true });
   }
 }
