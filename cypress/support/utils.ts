@@ -16,3 +16,9 @@ export const getSaveButton = () => cy.get('[data-test="save-client-button"]');
 
 export const getEditButton = () => cy.get('[data-test="edit-button"]');
 export const getNameDisplay = () => cy.get('[data-test="client-name-display"]');
+export const getEmailDisplay = () =>
+  cy.get('[data-test="client-email-display"]');
+export const getPhoneDisplay = () =>
+  cy.get('[data-test="client-phone-display"]');
+export const getNotesDisplay = () =>
+  cy.get('[data-test="client-notes-display"]');
