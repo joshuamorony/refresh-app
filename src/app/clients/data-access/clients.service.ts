@@ -4,6 +4,8 @@ import {
   collectionData,
   collection,
   addDoc,
+  doc,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Client } from './clients.store';
@@ -17,7 +19,9 @@ export class ClientsService {
 
   public getClients() {
     const clientsCollection = collection(this.firestore, 'clients');
-    return collectionData(clientsCollection) as Observable<Client[]>;
+    return collectionData(clientsCollection, { idField: 'id' }) as Observable<
+      Client[]
+    >;
   }
 
   public addClient(
@@ -25,5 +29,11 @@ export class ClientsService {
   ) {
     const clientsCollection = collection(this.firestore, 'clients');
     addDoc(clientsCollection, details);
+  }
+
+  public updateClient(client: Partial<Client> & { id: string }) {
+    const clientDocReference = doc(this.firestore, `clients/${client.id}`);
+    const { id, ...clientWithoutId } = client;
+    return setDoc(clientDocReference, clientWithoutId, { merge: true });
   }
 }

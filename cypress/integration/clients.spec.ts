@@ -1,9 +1,11 @@
 import {
   getAddClientButton,
+  getEditButton,
   getEmailField,
   getFirstNameField,
   getItemsInList,
   getLastNameField,
+  getNameDisplay,
   getNotesField,
   getPhoneField,
   getSaveButton,
@@ -15,6 +17,7 @@ describe('Clients', () => {
   beforeEach(() => {
     cy.login();
     cy.visit('/clients');
+    cy.callFirestore('delete', 'clients');
   });
 
   it('can see a list of clients', () => {
@@ -44,7 +47,22 @@ describe('Clients', () => {
     listOfClients.should('contain.text', 'Josh Morony');
   });
 
-  afterEach(() => {
-    cy.callFirestore('delete', 'clients');
+  it('can edit a clients details', () => {
+    cy.callFirestore('set', 'clients/abc123', {
+      name: {
+        first: 'Josh',
+        last: 'Morony',
+      },
+    });
+
+    const testEditedName = 'Amir';
+
+    getItemsInList().first().click();
+    getEditButton().click();
+    getFirstNameField().clear();
+    getFirstNameField().type(testEditedName);
+    getSaveButton().click();
+
+    getNameDisplay().should('contain.text', testEditedName);
   });
 });

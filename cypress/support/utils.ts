@@ -13,3 +13,6 @@ export const getEmailField = () => cy.get('[data-test="email-input"] input');
 export const getPhoneField = () => cy.get('[data-test="phone-input"] input');
 export const getNotesField = () => cy.get('[data-test="notes-input"] textarea');
 export const getSaveButton = () => cy.get('[data-test="save-client-button"]');
+
+export const getEditButton = () => cy.get('[data-test="edit-button"]');
+export const getNameDisplay = () => cy.get('[data-test="client-name-display"]');

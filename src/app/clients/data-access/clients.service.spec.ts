@@ -40,10 +40,17 @@ describe('ClientsService', () => {
         .mockReturnValue(mockDocumentData as any);
 
       const result = service.getClients();
+      const options = {
+        idField: 'id',
+      };
 
       expect(AngularFireFirestore.collection).toHaveBeenCalledWith(
         {},
         'clients'
+      );
+      expect(AngularFireFirestore.collectionData).toHaveBeenCalledWith(
+        mockCollectionReference,
+        options
       );
       expect(result).toBe(mockDocumentData);
     });
@@ -78,6 +85,43 @@ describe('ClientsService', () => {
       expect(AngularFireFirestore.addDoc).toHaveBeenCalledWith(
         mockCollectionReference,
         testClient
+      );
+    });
+  });
+
+  describe('updateClient()', () => {
+    it('should update the client document in Firestore with the supplied values', () => {
+      const mockDocumentReference = jest.fn();
+
+      const updatedClient = {
+        id: '123',
+        name: {
+          first: 'Josh',
+          last: 'Morony',
+        },
+        email: 'joshua.morony@gmail.com',
+        phone: '444',
+        notes: '',
+      };
+
+      const { id, ...updatedClientWithoutId } = updatedClient;
+
+      jest
+        .spyOn(AngularFireFirestore, 'doc')
+        .mockReturnValue(mockDocumentReference as any);
+
+      jest.spyOn(AngularFireFirestore, 'setDoc');
+
+      service.updateClient(updatedClient);
+
+      expect(AngularFireFirestore.doc).toHaveBeenCalledWith(
+        {},
+        `clients/${updatedClient.id}`
+      );
+      expect(AngularFireFirestore.setDoc).toHaveBeenCalledWith(
+        mockDocumentReference,
+        updatedClientWithoutId,
+        { merge: true }
       );
     });
   });

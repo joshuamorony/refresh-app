@@ -1,5 +1,10 @@
 <ion-list data-test="list">
-  <ion-item *ngFor="let client of clients">
+  <ion-item
+    *ngFor="let client of clients"
+    button
+    routerLink="/clients/{{ client.id }}"
+    routerDirection="forward"
+  >
     <ion-label>{{ client.name.first }} {{ client.name.last }}</ion-label>
   </ion-item>
 </ion-list>

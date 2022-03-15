@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ClientDetailPage } from './client-detail.page';
+
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('../client-dashboard/client-dashboard.module').then(
-        (m) => m.ClientDashboardPageModule
-      ),
+    component: ClientDetailPage,
   },
   {
-    path: 'add',
+    path: 'edit',
     loadChildren: () =>
       import('../client-add/client-add.module').then(
         (m) => m.ClientAddPageModule
-      ),
-  },
-  {
-    path: ':id',
-    loadChildren: () =>
-      import('../client-detail/client-detail.module').then(
-        (m) => m.ClientDetailPageModule
       ),
   },
 ];
@@ -29,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ClientShellRoutingModule {}
+export class ClientDetailPageRoutingModule {}

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ClientDetail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        *ngIf="client$ | async as client"
+        routerLink="/clients/{{client.id}}/edit"
+        routerDirection="forward"
+        data-test="edit-button"
+      >
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="client$ | async as client">
+    <h2 data-test="client-name-display">{{client.name.first}}</h2>
+  </ng-container>
+</ion-content>
