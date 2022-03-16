@@ -1,5 +1,7 @@
 import {
+  getAddClientBackButton,
   getAddClientButton,
+  getClientDetailBackButton,
   getEditButton,
   getEmailDisplay,
   getEmailField,
@@ -12,6 +14,7 @@ import {
   getPhoneDisplay,
   getPhoneField,
   getSaveButton,
+  getTitle,
 } from '../support/utils';
 
 describe('Clients', () => {
@@ -89,5 +92,33 @@ describe('Clients', () => {
     getPhoneDisplay().should('contain.text', testClient.phone);
     getEmailDisplay().should('contain.text', testClient.email);
     getNotesDisplay().should('contain.text', testClient.notes);
+  });
+
+  it('can navigate back to the clients list after viewing a specific client', () => {
+    const testClient = {
+      name: {
+        first: 'Josh',
+        last: 'Morony',
+      },
+      phone: '333',
+      email: 'joshua.morony@gmail.com',
+      notes: '',
+    };
+
+    cy.callFirestore('set', 'clients/abc123', testClient);
+
+    getItemsInList().first().click();
+
+    getClientDetailBackButton().click();
+
+    getItemsInList().should('contain.text', 'Josh Morony');
+  });
+
+  it('can navigate back to the clients list after going to the client-add page', () => {
+    getAddClientButton().first().click();
+
+    getAddClientBackButton().click();
+
+    getTitle().should('contain.text', 'Clients');
   });
 });

@@ -5,6 +5,12 @@
         {{ vm.client ? 'Edit Client' : 'Add Client' }}
       </ng-container>
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/clients"
+        data-test="add-client-back-button"
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
