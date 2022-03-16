@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>ClientDetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/clients"
+        data-test="client-detail-back-button"
+      ></ion-back-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button
         *ngIf="client$ | async as client"
