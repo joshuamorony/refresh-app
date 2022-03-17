@@ -1,27 +1,41 @@
-#container {
-  text-align: center;
+ion-content::part(scroll) {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  /* Background pattern from Toptal Subtle Patterns */
+  background-image: url(/assets/images/seigaiha.png);
+}
 
+img {
+  width: 50%;
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 0 10px var(--shadow-transparent));
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.login-button {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  opacity: 0.2;
+  bottom: 5px;
+  right: 5px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px var(--shadow-transparent));
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  50% {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 10px var(--shadow-transparent));
+  }
 
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px var(--shadow-transparent));
+  }
 }
