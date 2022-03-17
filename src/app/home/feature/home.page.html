@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title> Refresh </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <img src="/assets/images/logo-big.png" alt="Refresh logo" />
 
-<ion-content>
-  <ion-button data-test="login-button" (click)="login()">Login</ion-button>
+  <p>placeholder for content</p>
+
+  <ion-button
+    data-test="login-button"
+    color="medium"
+    fill="clear"
+    (click)="login()"
+    class="login-button"
+  >
+    <ion-icon slot="icon-only" name="key-outline"></ion-icon>
+  </ion-button>
 </ion-content>

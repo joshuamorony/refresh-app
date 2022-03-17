@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ClientDetail</ion-title>
+    <ion-title>
+      <ng-container *ngIf="client$ | async as client">
+        {{client.name.first}} {{client.name.last}}
+      </ng-container>
+    </ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="/clients"
@@ -20,16 +24,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ng-container *ngIf="client$ | async as client; else loading">
-    <h2 data-test="client-name-display">
-      {{client.name.first}} {{client.name.last}}
-    </h2>
-    <p data-test="client-phone-display">{{client.phone}}</p>
-    <p data-test="client-email-display">{{client.email}}</p>
-    <p data-test="client-notes-display">{{client.notes}}</p>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title data-test="client-name-display">
+          {{client.name.first}} {{client.name.last}}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none" data-test="client-email-display">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-label> {{client.email}} </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" data-test="client-phone-display">
+          <ion-icon slot="start" name="call-outline"></ion-icon>
+          <ion-label> {{client.phone}} </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <p data-test="client-notes-display">{{client.notes}}</p>
+      </ion-card-content>
+    </ion-card>
   </ng-container>
   <ng-template #loading>
-    <div data-test="loading">loading...</div>
+    <ion-card data-test="loading">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-icon slot="start" name="call-outline"></ion-icon>
+          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </ng-template>
 </ion-content>
