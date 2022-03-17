@@ -17,7 +17,7 @@ export class ClientAddPage implements OnInit {
     switchMap((params) =>
       this.clientsStore.clients$.pipe(
         map((clients) =>
-          params.get('id')
+          params.get('id') && clients
             ? clients.find((client) => client.id === params.get('id'))
             : null
         )

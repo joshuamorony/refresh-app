@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { ClientsStore } from '../../data-access/clients.store';
 
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-detail.page.html',
   styleUrls: ['./client-detail.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientDetailPage implements OnInit {
   client$ = this.route.paramMap.pipe(
     switchMap((params) =>
       this.clientsStore.clients$.pipe(
         map((clients) =>
-          clients.find((client) => client.id === params.get('id'))
+          clients
+            ? clients.find((client) => client.id === params.get('id'))
+            : clients
         )
       )
     )

@@ -1,4 +1,6 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
@@ -37,7 +39,11 @@ describe('ClientDetailPage', () => {
             },
           },
         ],
-      }).compileComponents();
+      })
+        .overrideComponent(ClientDetailPage, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
 
       TestBed.overrideProvider(ClientsStore, {
         useFactory: jest.fn().mockImplementation(() => ({
@@ -67,4 +73,62 @@ describe('ClientDetailPage', () => {
     const observerSpy = subscribeSpyTo(component.client$);
     expect(observerSpy.getLastValue()).toEqual(testClient);
   });
+
+  // describe('loading state', () => {
+  //   it('should display loading template if clients$ emits null', () => {
+  //     const loadingElement = fixture.debugElement.query(
+  //       By.css('[data-test="loading"]')
+  //     );
+
+  //     const clientList = fixture.debugElement.query(By.css('app-client-list'));
+
+  //     const message = fixture.debugElement.query(
+  //       By.css('[data-test="no-clients-message"]')
+  //     );
+
+  //     expect(loadingElement).toBeTruthy();
+  //     expect(clientList).toBeFalsy();
+  //     expect(message).toBeFalsy();
+  //   });
+
+  //   it('should display client-list if clients$ has emitted a value', () => {
+  //     mockClients$.next([{}]);
+  //     fixture.detectChanges();
+
+  //     const loadingElement = fixture.debugElement.query(
+  //       By.css('[data-test="loading"]')
+  //     );
+
+  //     const clientList = fixture.debugElement.query(By.css('app-client-list'));
+
+  //     const message = fixture.debugElement.query(
+  //       By.css('[data-test="no-clients-message"]')
+  //     );
+
+  //     expect(
+  //       fixture.debugElement.query(By.css('[data-test="loading"]'))
+  //     ).toBeFalsy();
+  //     expect(clientList).toBeTruthy();
+  //     expect(message).toBeFalsy();
+  //   });
+
+  //   it('should display a message if clients$ emits empty array', () => {
+  //     mockClients$.next([]);
+  //     fixture.detectChanges();
+
+  //     const loadingElement = fixture.debugElement.query(
+  //       By.css('[data-test="loading"]')
+  //     );
+
+  //     const clientList = fixture.debugElement.query(By.css('app-client-list'));
+
+  //     const message = fixture.debugElement.query(
+  //       By.css('[data-test="no-clients-message"]')
+  //     );
+
+  //     expect(loadingElement).toBeFalsy();
+  //     expect(clientList).toBeTruthy();
+  //     expect(message).toBeTruthy();
+  //   });
+  // });
 });
