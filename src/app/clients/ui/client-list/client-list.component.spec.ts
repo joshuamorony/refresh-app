@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -6,6 +6,14 @@ import { IonicModule } from '@ionic/angular';
 import { Client } from '../../data-access/clients.store';
 
 import { ClientListComponent } from './client-list.component';
+
+@Component({
+  selector: 'app-client-list',
+  template: '',
+})
+export class MockClientListComponent {
+  @Input() clients: any[];
+}
 
 describe('ClientListComponent', () => {
   let component: ClientListComponent;

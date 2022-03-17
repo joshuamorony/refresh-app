@@ -47,6 +47,6 @@ export class ClientsStore extends ComponentStore<ClientsState> {
   );
 
   constructor(private clientsService: ClientsService) {
-    super({ clients: [] });
+    super({ clients: null });
   }
 }

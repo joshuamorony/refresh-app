@@ -14,8 +14,13 @@
 </ion-header>
 
 <ion-content>
-  <app-client-list
-    *ngIf="clientsStore.clients$ | async as clients"
-    [clients]="clients"
-  ></app-client-list>
+  <ng-container *ngIf="clientsStore.clients$ | async as clients; else loading">
+    <p data-test="no-clients-message" *ngIf="!clients.length">
+      No clients. Click the add button to begin!
+    </p>
+    <app-client-list [clients]="clients"></app-client-list>
+  </ng-container>
+  <ng-template #loading>
+    <div data-test="loading">loading...</div>
+  </ng-template>
 </ion-content>
