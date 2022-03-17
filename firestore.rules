@@ -9,6 +9,6 @@ service cloud.firestore {
   }
 
   function isAdmin(){
-  	return request.auth != null && request.auth.token.email == 'joshua.morony@gmail.com' && request.auth.token.email_verified;
+  	return request.auth != null && request.auth.token.email == 'kathryn.morony@gmail.com' && request.auth.token.email_verified;
   }
 }

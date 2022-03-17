@@ -17,7 +17,7 @@ const getFirestore = (authUser?: { uid: string; token: TokenOptions }) =>
 
 const adminAuth = {
   uid: 'user_good',
-  token: { email: 'joshua.morony@gmail.com', email_verified: true },
+  token: { email: 'kathryn.morony@gmail.com', email_verified: true },
 };
 const hackerAuth = {
   uid: 'user_bad',
