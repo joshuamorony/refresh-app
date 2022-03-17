@@ -8,7 +8,7 @@
       "displayName": "admin",
       "photoUrl": "",
       "emailVerified": true,
-      "email": "joshua.morony@gmail.com",
+      "email": "kathryn.morony@gmail.com",
       "salt": "fakeSalt4sV9Zt652sAzc5jQBhlP",
       "passwordHash": "fakeHash:salt=fakeSalt4sV9Zt652sAzc5jQBhlP:password=password",
       "passwordUpdatedAt": 1646024016156,
@@ -16,9 +16,9 @@
       "providerUserInfo": [
         {
           "providerId": "password",
-          "email": "joshua.morony@gmail.com",
-          "federatedId": "joshua.morony@gmail.com",
-          "rawId": "joshua.morony@gmail.com",
+          "email": "kathryn.morony@gmail.com",
+          "federatedId": "kathryn.morony@gmail.com",
+          "rawId": "kathryn.morony@gmail.com",
           "displayName": "admin",
           "photoUrl": ""
         }
