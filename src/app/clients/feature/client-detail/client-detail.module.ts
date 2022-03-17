@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ClientDetailPageRoutingModule } from './client-detail-routing.module';
 
 import { ClientDetailPage } from './client-detail.page';
+import { ClientDetailCardComponentModule } from '../../ui/client-detail-card/client-detail-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientDetailPageRoutingModule
+    ClientDetailPageRoutingModule,
+    ClientDetailCardComponentModule,
   ],
-  declarations: [ClientDetailPage]
+  declarations: [ClientDetailPage],
 })
 export class ClientDetailPageModule {}

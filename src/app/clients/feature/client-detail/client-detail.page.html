@@ -25,33 +25,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ng-container *ngIf="client$ | async as client; else loading">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title data-test="client-name-display">
-          {{client.name.first}} {{client.name.last}}
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-item lines="none" data-test="client-email-display">
-          <ion-icon slot="start" name="mail-outline"></ion-icon>
-          <ion-label> {{client.email}} </ion-label>
-        </ion-item>
-
-        <ion-item lines="none" data-test="client-phone-display">
-          <ion-icon slot="start" name="call-outline"></ion-icon>
-          <ion-label> {{client.phone}} </ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-      <ion-card-content>
-        <p data-test="client-notes-display">{{client.notes}}</p>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+  <app-client-detail-card
+    *ngIf="client$ | async as client; else loading"
+    [client]="client"
+  >
+  </app-client-detail-card>
   <ng-template #loading>
     <ion-card data-test="loading">
       <ion-card-header>
