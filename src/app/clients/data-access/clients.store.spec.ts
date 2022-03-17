@@ -31,9 +31,9 @@ describe('ClientsStore', () => {
   });
 
   describe('selector: clients$', () => {
-    it('should return empty array by default', () => {
+    it('should return null by default', () => {
       const observerSpy = subscribeSpyTo(service.clients$);
-      expect(observerSpy.getFirstValue()).toEqual([]);
+      expect(observerSpy.getFirstValue()).toEqual(null);
     });
   });
 
