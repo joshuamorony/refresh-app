@@ -21,7 +21,7 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="client$ | async as client">
+  <ng-container *ngIf="client$ | async as client; else loading">
     <h2 data-test="client-name-display">
       {{client.name.first}} {{client.name.last}}
     </h2>
@@ -29,4 +29,7 @@
     <p data-test="client-email-display">{{client.email}}</p>
     <p data-test="client-notes-display">{{client.notes}}</p>
   </ng-container>
+  <ng-template #loading>
+    <div data-test="loading">loading...</div>
+  </ng-template>
 </ion-content>

@@ -81,9 +81,7 @@ describe('ClientDashboardPage', () => {
         By.css('[data-test="no-clients-message"]')
       );
 
-      expect(
-        fixture.debugElement.query(By.css('[data-test="loading"]'))
-      ).toBeFalsy();
+      expect(loadingElement).toBeFalsy();
       expect(clientList).toBeTruthy();
       expect(message).toBeFalsy();
     });

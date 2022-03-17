@@ -16,7 +16,7 @@ export class ClientDetailPage implements OnInit {
         map((clients) =>
           clients
             ? clients.find((client) => client.id === params.get('id'))
-            : clients
+            : null
         )
       )
     )
