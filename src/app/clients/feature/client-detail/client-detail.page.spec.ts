@@ -7,6 +7,7 @@ import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
 import { of, ReplaySubject } from 'rxjs';
 import { Client, ClientsStore } from '../../data-access/clients.store';
+import { MockClientDetailCardComponent } from '../../ui/client-detail-card/client-detail-card.component.spec';
 import { ClientDetailPage } from './client-detail.page';
 
 describe('ClientDetailPage', () => {
@@ -31,7 +32,7 @@ describe('ClientDetailPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ClientDetailPage],
+        declarations: [ClientDetailPage, MockClientDetailCardComponent],
         imports: [IonicModule.forRoot(), RouterTestingModule],
         providers: [
           {
@@ -94,7 +95,7 @@ describe('ClientDetailPage', () => {
       expect(dataDisplay).toBeFalsy();
     });
 
-    it('should display data if clients$ has emitted a value', () => {
+    it('should display client-detail-card if clients$ has emitted a value', () => {
       mockClients$.next([testClient]);
       fixture.detectChanges();
 
@@ -102,12 +103,12 @@ describe('ClientDetailPage', () => {
         By.css('[data-test="loading"]')
       );
 
-      const dataDisplay = fixture.debugElement.query(
-        By.css('[data-test="client-name-display"]')
+      const clientCard = fixture.debugElement.query(
+        By.css('app-client-detail-card')
       );
 
       expect(loadingElement).toBeFalsy();
-      expect(dataDisplay).toBeTruthy();
+      expect(clientCard).toBeTruthy();
     });
   });
 });
