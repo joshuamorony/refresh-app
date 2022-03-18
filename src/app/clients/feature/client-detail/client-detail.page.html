@@ -26,29 +26,8 @@
 
 <ion-content class="ion-padding">
   <app-client-detail-card
-    *ngIf="client$ | async as client; else loading"
-    [client]="client"
+    *ngIf="{ client: client$ | async } as vm"
+    [client]="vm.client"
   >
   </app-client-detail-card>
-  <ng-template #loading>
-    <ion-card data-test="loading">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="mail-outline"></ion-icon>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-icon slot="start" name="call-outline"></ion-icon>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-  </ng-template>
 </ion-content>

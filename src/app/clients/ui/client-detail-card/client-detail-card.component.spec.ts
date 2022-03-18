@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
@@ -24,7 +24,11 @@ describe('ClientDetailCardComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ClientDetailCardComponent],
         imports: [IonicModule.forRoot()],
-      }).compileComponents();
+      })
+        .overrideComponent(ClientDetailCardComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
 
       fixture = TestBed.createComponent(ClientDetailCardComponent);
       component = fixture.componentInstance;
@@ -52,6 +56,22 @@ describe('ClientDetailCardComponent', () => {
   });
 
   describe('@Input() client', () => {
+    it('displays loading template if undefined', () => {
+      component.client = undefined;
+      fixture.detectChanges();
+
+      const loading = fixture.debugElement.query(
+        By.css('[data-test="loading"]')
+      );
+
+      const display = fixture.debugElement.query(
+        By.css('[data-test="client-name-display"]')
+      );
+
+      expect(loading).toBeTruthy();
+      expect(display).toBeFalsy();
+    });
+
     it('displays the clients name', () => {
       const nameDisplay = fixture.debugElement.query(
         By.css('[data-test="client-name-display"]')
