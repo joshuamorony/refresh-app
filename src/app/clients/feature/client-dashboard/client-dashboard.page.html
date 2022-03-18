@@ -14,19 +14,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ng-container *ngIf="clientsStore.clients$ | async as clients; else loading">
-    <p data-test="no-clients-message" *ngIf="!clients.length">
-      No clients. Click the add button to begin!
-    </p>
-    <app-client-list [clients]="clients"></app-client-list>
+  <ng-container *ngIf="{ clients: clientsStore.clients$ | async } as vm">
+    <app-client-list [clients]="vm.clients"></app-client-list>
   </ng-container>
-  <ng-template #loading>
-    <ion-list lines="none" data-test="loading">
-      <ion-item>
-        <ion-label>
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ng-template>
 </ion-content>

@@ -1,4 +1,7 @@
-<ion-list lines="none" data-test="list">
+<ion-list lines="none" data-test="list" *ngIf="clients; else loading">
+  <p data-test="no-clients-message" *ngIf="!clients.length">
+    No clients. Click the add button to begin!
+  </p>
   <ion-item
     *ngFor="let client of clients"
     button
@@ -8,3 +11,12 @@
     <ion-label>{{ client.name.first }} {{ client.name.last }}</ion-label>
   </ion-item>
 </ion-list>
+<ng-template #loading>
+  <ion-list lines="none" data-test="loading">
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>

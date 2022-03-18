@@ -1,25 +1,48 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title data-test="client-name-display">
-      {{ client.name.first }} {{ client.name.last }}
-    </ion-card-title>
-  </ion-card-header>
+<ng-container *ngIf="client; else loading">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title data-test="client-name-display">
+        {{ client.name.first }} {{ client.name.last }}
+      </ion-card-title>
+    </ion-card-header>
 
-  <ion-card-content>
-    <ion-item lines="none" data-test="client-email-display">
-      <ion-icon slot="start" name="mail-outline"></ion-icon>
-      <ion-label> {{ client.email }} </ion-label>
-    </ion-item>
+    <ion-card-content>
+      <ion-item lines="none" data-test="client-email-display">
+        <ion-icon slot="start" name="mail-outline"></ion-icon>
+        <ion-label> {{ client.email }} </ion-label>
+      </ion-item>
 
-    <ion-item lines="none" data-test="client-phone-display">
-      <ion-icon slot="start" name="call-outline"></ion-icon>
-      <ion-label> {{ client.phone }} </ion-label>
-    </ion-item>
-  </ion-card-content>
-</ion-card>
+      <ion-item lines="none" data-test="client-phone-display">
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        <ion-label> {{ client.phone }} </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-<ion-card>
-  <ion-card-content>
-    <p data-test="client-notes-display">{{ client.notes }}</p>
-  </ion-card-content>
-</ion-card>
+  <ion-card>
+    <ion-card-content>
+      <p data-test="client-notes-display">{{ client.notes }}</p>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+<ng-template #loading>
+  <ion-card data-test="loading">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="mail-outline"></ion-icon>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ng-template>
