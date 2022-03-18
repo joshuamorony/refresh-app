@@ -41,6 +41,31 @@ describe('ClientListComponent', () => {
   });
 
   describe('@Input() clients', () => {
+    it('displays loading template if undefined', () => {
+      component.clients = undefined;
+      fixture.detectChanges();
+
+      const loading = fixture.debugElement.query(
+        By.css('[data-test="loading"]')
+      );
+
+      const list = fixture.debugElement.query(By.css('[data-test="list"]'));
+
+      expect(loading).toBeTruthy();
+      expect(list).toBeFalsy();
+    });
+
+    it('displays a message if there are no clients', () => {
+      component.clients = [];
+      fixture.detectChanges();
+
+      const message = fixture.debugElement.query(
+        By.css('[data-test="no-clients-message"]')
+      );
+
+      expect(message).toBeTruthy();
+    });
+
     it('renders an item for each client', () => {
       const testClients: Partial<Client>[] = [
         {
