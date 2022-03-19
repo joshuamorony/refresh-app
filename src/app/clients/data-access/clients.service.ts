@@ -1,27 +1,38 @@
 import { Injectable } from '@angular/core';
 import {
-  Firestore,
-  collectionData,
-  collection,
   addDoc,
+  collection,
+  collectionData,
   doc,
+  Firestore,
   setDoc,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Client } from './clients.store';
+import { concat, Observable, of, throwError } from 'rxjs';
+import { catchError, filter, retryWhen, switchMap } from 'rxjs/operators';
+import { AuthService } from '../../shared/data-access/auth.service';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
+import { Client } from './clients.store';
 
 @Injectable({
   providedIn: ClientShellModule,
 })
 export class ClientsService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private authService: AuthService) {}
 
   public getClients() {
     const clientsCollection = collection(this.firestore, 'clients');
-    return collectionData(clientsCollection, { idField: 'id' }) as Observable<
-      Client[]
-    >;
+    return collectionData(clientsCollection, { idField: 'id' }).pipe(
+      // Emit null before erroring to clear client data in store, then rethrow error
+      catchError((err) => concat(of(null), throwError(err))),
+      // Restart stream when user logs back in
+      retryWhen((errors) =>
+        errors.pipe(
+          switchMap(() =>
+            this.authService.getLoggedIn().pipe(filter((user) => !!user))
+          )
+        )
+      )
+    ) as Observable<Client[]>;
   }
 
   public addClient(

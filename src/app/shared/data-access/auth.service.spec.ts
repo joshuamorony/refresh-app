@@ -3,26 +3,45 @@ import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { AuthService } from './auth.service';
 import * as AngularFireAuth from '@angular/fire/auth';
 import { of } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 jest.mock('@angular/fire/auth');
 
 describe('AuthService', () => {
   let service: AuthService;
   let auth: AngularFireAuth.Auth;
+  let navCtrl: NavController;
 
   beforeEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
 
     TestBed.configureTestingModule({
-      providers: [AngularFireAuth.Auth],
+      providers: [
+        AngularFireAuth.Auth,
+        { provide: NavController, useValue: { navigateRoot: jest.fn() } },
+      ],
     });
     service = TestBed.inject(AuthService);
     auth = TestBed.inject(AngularFireAuth.Auth);
+    navCtrl = TestBed.inject(NavController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('logout()', () => {
+    it('should call the signOut method', async () => {
+      jest.spyOn(AngularFireAuth, 'signOut');
+      await service.logout();
+      expect(AngularFireAuth.signOut).toHaveBeenCalledWith(auth);
+    });
+
+    it('should navigate back to the home page', async () => {
+      await service.logout();
+      expect(navCtrl.navigateRoot).toHaveBeenCalledWith('/home');
+    });
   });
 
   describe('loginWithGoogle()', () => {

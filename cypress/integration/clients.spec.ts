@@ -8,6 +8,8 @@ import {
   getFirstNameField,
   getItemsInList,
   getLastNameField,
+  getLoginButton,
+  getLogoutButton,
   getNameDisplay,
   getNotesDisplay,
   getNotesField,
@@ -120,5 +122,9 @@ describe('Clients', () => {
     getAddClientBackButton().click();
 
     getTitle().should('contain.text', 'Clients');
+  });
+
+  it('can log out', () => {
+    getLogoutButton().should('be.visible');
   });
 });

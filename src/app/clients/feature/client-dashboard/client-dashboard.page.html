@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title data-test="page-title">Clients</ion-title>
+    <ion-buttons slot="start">
+      <ion-button data-test="logout-button" (click)="authService.logout()">
+        <ion-icon slot="icon-only" name="power-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button
         data-test="add-client-button"
