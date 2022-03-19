@@ -3,9 +3,12 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { of } from 'rxjs';
+import { AuthService } from '../../../shared/data-access/auth.service';
 import { ClientsStore } from '../../data-access/clients.store';
 import { MockClientListComponent } from '../../ui/client-list/client-list.component.spec';
 import { ClientDashboardPage } from './client-dashboard.page';
+
+jest.mock('../../../shared/data-access/auth.service');
 
 describe('ClientDashboardPage', () => {
   let component: ClientDashboardPage;
@@ -15,6 +18,7 @@ describe('ClientDashboardPage', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ClientDashboardPage, MockClientListComponent],
+        providers: [AuthService],
         imports: [IonicModule.forRoot(), RouterTestingModule],
       })
         .overrideComponent(ClientDashboardPage, {

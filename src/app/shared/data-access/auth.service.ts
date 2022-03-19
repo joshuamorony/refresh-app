@@ -4,7 +4,9 @@ import {
   authState,
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
 } from '@angular/fire/auth';
+import { NavController } from '@ionic/angular';
 import { from, of } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 
@@ -12,7 +14,7 @@ import { first, switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private navCtrl: NavController) {}
 
   getLoggedIn() {
     return authState(this.auth);
@@ -27,5 +29,10 @@ export class AuthService {
           : from(signInWithPopup(this.auth, new GoogleAuthProvider()))
       )
     );
+  }
+
+  async logout() {
+    this.navCtrl.navigateRoot('/home');
+    await signOut(this.auth);
   }
 }

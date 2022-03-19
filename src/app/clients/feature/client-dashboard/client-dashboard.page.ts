@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../shared/data-access/auth.service';
 import { ClientsStore } from '../../data-access/clients.store';
 
 @Component({
@@ -8,7 +9,10 @@ import { ClientsStore } from '../../data-access/clients.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientDashboardPage implements OnInit {
-  constructor(public clientsStore: ClientsStore) {}
+  constructor(
+    public clientsStore: ClientsStore,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.clientsStore.loadClients();
