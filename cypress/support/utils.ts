@@ -29,3 +29,5 @@ export const getNotesDisplay = () =>
   cy.get('[data-test="client-notes-display"]');
 export const getClientDetailBackButton = () =>
   cy.get('[data-test="client-detail-back-button"]');
+export const getDeleteButton = () => cy.get('[data-test="delete-button"]');
+export const getConfirmButton = () => cy.get('[data-test="confirm-button"');

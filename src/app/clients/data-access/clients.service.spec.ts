@@ -170,4 +170,23 @@ describe('ClientsService', () => {
       );
     });
   });
+
+  describe('removeClient()', () => {
+    it('should delete the client document in Firestore', () => {
+      const mockDocumentReference = jest.fn();
+      const clientId = '123';
+      jest
+        .spyOn(AngularFireFirestore, 'doc')
+        .mockReturnValue(mockDocumentReference as any);
+      jest.spyOn(AngularFireFirestore, 'deleteDoc');
+      service.removeClient(clientId);
+      expect(AngularFireFirestore.doc).toHaveBeenCalledWith(
+        {},
+        `clients/${clientId}`
+      );
+      expect(AngularFireFirestore.deleteDoc).toHaveBeenCalledWith(
+        mockDocumentReference
+      );
+    });
+  });
 });

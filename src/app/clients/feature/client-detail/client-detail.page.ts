@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { ClientsStore } from '../../data-access/clients.store';
+import { NavController } from '@ionic/angular';
+import { map, switchMap } from 'rxjs/operators';
+import { ClientsService } from '../../data-access/clients.service';
+import { Client, ClientsStore } from '../../data-access/clients.store';
 
 @Component({
   selector: 'app-client-detail',
@@ -24,10 +26,17 @@ export class ClientDetailPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private clientsStore: ClientsStore
+    private navCtrl: NavController,
+    private clientsStore: ClientsStore,
+    public clientsService: ClientsService
   ) {}
 
   ngOnInit() {
     this.clientsStore.loadClients();
+  }
+
+  deleteClient(client: Client) {
+    this.clientsService.removeClient(client.id);
+    this.navCtrl.navigateBack('/clients');
   }
 }

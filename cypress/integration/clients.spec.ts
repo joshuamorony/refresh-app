@@ -2,6 +2,8 @@ import {
   getAddClientBackButton,
   getAddClientButton,
   getClientDetailBackButton,
+  getConfirmButton,
+  getDeleteButton,
   getEditButton,
   getEmailDisplay,
   getEmailField,
@@ -122,6 +124,26 @@ describe('Clients', () => {
     getAddClientBackButton().click();
 
     getTitle().should('contain.text', 'Clients');
+  });
+
+  it('can delete a client', () => {
+    const clientToDelete = {
+      name: {
+        first: 'Josh',
+        last: 'Morony',
+      },
+      phone: '333',
+      email: 'joshua.morony@gmail.com',
+      notes: '',
+    };
+
+    cy.callFirestore('set', 'clients/abc123', clientToDelete);
+
+    getItemsInList().first().click();
+    getDeleteButton().click();
+    getConfirmButton().click();
+
+    getItemsInList().should('not.exist');
   });
 
   it('can log out', () => {

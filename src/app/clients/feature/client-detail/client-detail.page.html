@@ -25,9 +25,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <app-client-detail-card
-    *ngIf="{ client: client$ | async } as vm"
-    [client]="vm.client"
-  >
-  </app-client-detail-card>
+  <ng-container *ngIf="{ client: client$ | async } as vm">
+    <app-client-detail-card [client]="vm.client"> </app-client-detail-card>
+    <ion-button
+      data-test="delete-button"
+      color="danger"
+      fill="outline"
+      (click)="deleteClient(vm.client)"
+    >
+      Delete Client
+    </ion-button>
+  </ng-container>
 </ion-content>

@@ -3,11 +3,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { of } from 'rxjs';
+import { ClientsService } from '../../data-access/clients.service';
 import { Client, ClientsStore } from '../../data-access/clients.store';
 import { MockClientDetailCardComponent } from '../../ui/client-detail-card/client-detail-card.component.spec';
 import { ClientDetailPage } from './client-detail.page';
+
+jest.mock('../../data-access/clients.service');
 
 describe('ClientDetailPage', () => {
   let component: ClientDetailPage;
@@ -38,6 +41,13 @@ describe('ClientDetailPage', () => {
               paramMap: of(convertToParamMap({ id: testClient.id })),
             },
           },
+          {
+            provide: NavController,
+            useValue: {
+              navigateBack: jest.fn(),
+            },
+          },
+          ClientsService,
         ],
       })
         .overrideComponent(ClientDetailPage, {
@@ -72,5 +82,23 @@ describe('ClientDetailPage', () => {
   it('client$ should be a stream of the client matching the id param', () => {
     const observerSpy = subscribeSpyTo(component.client$);
     expect(observerSpy.getLastValue()).toEqual(testClient);
+  });
+
+  describe('deleteClient()', () => {
+    it('should pass the client being deleted to the client service', () => {
+      const clientsService = fixture.debugElement.injector.get(ClientsService);
+
+      jest.spyOn(clientsService, 'removeClient');
+
+      component.deleteClient(testClient);
+
+      expect(clientsService.removeClient).toHaveBeenCalledWith(testClient.id);
+    });
+
+    it('should navigate back to the clients page', () => {
+      const navCtrl = fixture.debugElement.injector.get(NavController);
+      component.deleteClient(testClient);
+      expect(navCtrl.navigateBack).toHaveBeenCalledWith('/clients');
+    });
   });
 });

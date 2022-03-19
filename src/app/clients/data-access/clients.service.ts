@@ -3,6 +3,7 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   Firestore,
   setDoc,
@@ -46,5 +47,10 @@ export class ClientsService {
     const clientDocReference = doc(this.firestore, `clients/${client.id}`);
     const { id, ...clientWithoutId } = client;
     return setDoc(clientDocReference, clientWithoutId, { merge: true });
+  }
+
+  public removeClient(id: string) {
+    const clientDocReference = doc(this.firestore, `clients/${id}`);
+    return deleteDoc(clientDocReference);
   }
 }
