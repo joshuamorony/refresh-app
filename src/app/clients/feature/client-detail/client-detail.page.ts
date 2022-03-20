@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { map, switchMap } from 'rxjs/operators';
 import { ClientsService } from '../../data-access/clients.service';
 import { Client, ClientsStore } from '../../data-access/clients.store';
@@ -28,15 +28,36 @@ export class ClientDetailPage implements OnInit {
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private clientsStore: ClientsStore,
-    public clientsService: ClientsService
+    public clientsService: ClientsService,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
     this.clientsStore.loadClients();
   }
 
-  deleteClient(client: Client) {
-    this.clientsService.removeClient(client.id);
-    this.navCtrl.navigateBack('/clients');
+  async deleteClient(client: Client) {
+    const alert = await this.alertCtrl.create({
+      header: 'Delete client?',
+      message: 'This will permanently delete this clients data',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary cancel',
+        },
+        {
+          text: 'Delete',
+          cssClass: 'danger confirm',
+          id: 'confirm-delete',
+          handler: () => {
+            this.navCtrl.navigateBack('/clients');
+            this.clientsService.removeClient(client.id);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
