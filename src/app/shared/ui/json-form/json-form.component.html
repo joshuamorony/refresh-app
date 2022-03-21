@@ -1,0 +1,44 @@
+<form [formGroup]="formGroup">
+  <ion-item *ngFor="let control of formData.controls">
+    <ion-label *ngIf="control.label !== ''">{{ control.label }}</ion-label>
+    <ion-datetime
+      *ngIf="control.type === 'date'"
+      [formControlName]="control.name"
+    ></ion-datetime>
+    <ion-textarea
+      *ngIf="control.type === 'textarea'"
+      [formControlName]="control.name"
+      [value]="control.value"
+    ></ion-textarea>
+    <ion-range
+      *ngIf="control.type === 'range'"
+      [min]="control.options.min"
+      [max]="control.options.max"
+      [formControlName]="control.name"
+    >
+      <ion-icon
+        size="small"
+        slot="start"
+        [name]="control.options.icon"
+      ></ion-icon>
+      <ion-icon slot="end" [name]="control.options.icon"></ion-icon>
+    </ion-range>
+    <ng-container *ngIf="control.type === 'checkbox'">
+      <ion-checkbox
+        *ngFor="let item of control.options.items"
+        [formControlName]="control.name"
+        [checked]="control.value"
+      ></ion-checkbox>
+    </ng-container>
+    <ion-radio-group
+      *ngIf="control.type === 'radio'"
+      [formControlName]="control.name"
+      [value]="control.value"
+    >
+      <ion-item *ngFor="let item of control.options.items">
+        <ion-label>{{ item.label }}</ion-label>
+        <ion-radio [value]="item.value"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-item>
+</form>

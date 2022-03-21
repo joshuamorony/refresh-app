@@ -1,0 +1,236 @@
+{
+  "controls": [
+    {
+      "name": "treatmentDate",
+      "label": "Treatment Date",
+      "type": "date",
+      "validators": {}
+    },
+    {
+      "name": "onTime",
+      "label": "Was your treatment on time?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {}
+    },
+    {
+      "name": "treatmentRoom",
+      "label": "What was the treatment room like?",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "comments",
+      "label": "Comments",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "purpose",
+      "label": "Comment on the type of treatment you received and whether it addressed the purpose of your visit",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "senseOfCare",
+      "label": "Sense of Care",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "technique",
+      "label": "Technique",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "professionalism",
+      "label": "Professionalism",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "comfort",
+      "label": "Comfort",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "adviceKnowledge",
+      "label": "Advice/Knowledge given",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "likelihoodReturn",
+      "label": "Likelihood of returning?",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "likelihoodRecommendation",
+      "label": "Likelihood of recommendation?",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "areasRelaxing",
+      "label": "What areas of the body did you find most relaxing?",
+      "type": "checkbox",
+      "options": {
+        "items": [
+          { "label": "Head (front)", "value": "head-front" },
+          { "label": "Head (back)", "value": "head-back" },
+          { "label": "Chest", "value": "chest" },
+          { "label": "Upper Back", "value": "upper-back" },
+          { "label": "Lower Back", "value": "lower-back" },
+          { "label": "Shoulders", "value": "shoulders" },
+          { "label": "Upper Arms", "value": "upper-arms" },
+          { "label": "Lower Arms", "value": "lower-arms" },
+          { "label": "Hands", "value": "hands" },
+          { "label": "Abdominal", "value": "abdominal" },
+          { "label": "Upper Leg", "value": "upper-leg" },
+          { "label": "Lower Leg", "value": "lower-leg" },
+          { "label": "Feet", "value": "feet" }
+        ]
+      },
+      "validators": {}
+    },
+    {
+      "name": "areasFavourite",
+      "label": "Which areas did you like the most?",
+      "type": "checkbox",
+      "options": {
+        "items": [
+          { "label": "Head (front)", "value": "head-front" },
+          { "label": "Head (back)", "value": "head-back" },
+          { "label": "Chest", "value": "chest" },
+          { "label": "Upper Back", "value": "upper-back" },
+          { "label": "Lower Back", "value": "lower-back" },
+          { "label": "Shoulders", "value": "shoulders" },
+          { "label": "Upper Arms", "value": "upper-arms" },
+          { "label": "Lower Arms", "value": "lower-arms" },
+          { "label": "Hands", "value": "hands" },
+          { "label": "Abdominal", "value": "abdominal" },
+          { "label": "Upper Leg", "value": "upper-leg" },
+          { "label": "Lower Leg", "value": "lower-leg" },
+          { "label": "Feet", "value": "feet" }
+        ]
+      },
+      "validators": {}
+    },
+    {
+      "name": "areasImprovment",
+      "label": "Which areas did you least enjoy?",
+      "type": "checkbox",
+      "options": {
+        "items": [
+          { "label": "Head (front)", "value": "head-front" },
+          { "label": "Head (back)", "value": "head-back" },
+          { "label": "Chest", "value": "chest" },
+          { "label": "Upper Back", "value": "upper-back" },
+          { "label": "Lower Back", "value": "lower-back" },
+          { "label": "Shoulders", "value": "shoulders" },
+          { "label": "Upper Arms", "value": "upper-arms" },
+          { "label": "Lower Arms", "value": "lower-arms" },
+          { "label": "Hands", "value": "hands" },
+          { "label": "Abdominal", "value": "abdominal" },
+          { "label": "Upper Leg", "value": "upper-leg" },
+          { "label": "Lower Leg", "value": "lower-leg" },
+          { "label": "Feet", "value": "feet" }
+        ]
+      },
+      "validators": {}
+    },
+    {
+      "name": "improvement",
+      "label": "Anything specific that could be improved?",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "overallComments",
+      "label": "Any other comments?",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    }
+  ]
+}
