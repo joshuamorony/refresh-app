@@ -52,34 +52,16 @@ describe('JsonFormComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
+      // Should render
       const dateControl = fixture.debugElement.query(By.css('ion-datetime'));
       expect(dateControl).toBeTruthy();
-    });
 
-    it('can render a radio input', () => {
-      const testFormData: JsonFormData = {
-        controls: [
-          {
-            name: 'radio',
-            label: 'Radio',
-            type: 'radio',
-            options: {
-              items: [
-                { label: 'Yes', value: 'yes' },
-                { label: 'No', value: 'no' },
-              ],
-            },
-            validators: {},
-          },
-        ],
-      };
-
-      component.formData = testFormData;
-      component.ngOnChanges();
-      fixture.detectChanges();
-
-      const radioControl = fixture.debugElement.query(By.css('ion-radio'));
-      expect(radioControl).toBeTruthy();
+      // Should be bound to control
+      const testValue = '123';
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+      expect(dateControl.componentInstance.value).toBe(testValue);
     });
 
     it('can render a checkbox input', () => {
@@ -104,10 +86,18 @@ describe('JsonFormComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
+      // Should render
       const checkboxControl = fixture.debugElement.query(
         By.css('ion-checkbox')
       );
       expect(checkboxControl).toBeTruthy();
+
+      // Should be bound to control
+      const testValue = '123';
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+      expect(checkboxControl.componentInstance.value).toBe(testValue);
     });
 
     it('can render a range input', () => {
@@ -133,8 +123,16 @@ describe('JsonFormComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
+      // Should render
       const rangeControl = fixture.debugElement.query(By.css('ion-range'));
       expect(rangeControl).toBeTruthy();
+
+      // Should be bound to control
+      const testValue = '123';
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+      expect(rangeControl.componentInstance.value).toBe(testValue);
     });
 
     it('can render a textarea', () => {
@@ -153,31 +151,27 @@ describe('JsonFormComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
+      // Should render
       const textareaControl = fixture.debugElement.query(
         By.css('ion-textarea')
       );
       expect(textareaControl).toBeTruthy();
+
+      // Should be bound to control
+      const testValue = '123';
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+      expect(textareaControl.componentInstance.value).toBe(testValue);
     });
 
-    it('can render groups of checkboxes and radio inputs', () => {
+    it('can render groups of radio inputs', () => {
       const testFormData: JsonFormData = {
         controls: [
           {
             name: 'radio',
             label: 'Radio',
             type: 'radio',
-            options: {
-              items: [
-                { label: 'Yes', value: 'yes' },
-                { label: 'No', value: 'no' },
-              ],
-            },
-            validators: {},
-          },
-          {
-            name: 'checkbox',
-            label: 'Checkbox',
-            type: 'checkbox',
             options: {
               items: [
                 { label: 'Yes', value: 'yes' },
@@ -196,13 +190,15 @@ describe('JsonFormComponent', () => {
       const radioGroup = fixture.debugElement.query(By.css('ion-radio-group'));
       const radioItems = fixture.debugElement.queryAll(By.css('ion-radio'));
 
-      const checkboxItems = fixture.debugElement.queryAll(
-        By.css('ion-checkbox')
-      );
-
       expect(radioGroup).toBeTruthy();
       expect(radioItems.length).toBe(2);
-      expect(checkboxItems.length).toBe(2);
+
+      // Should be bound to control
+      const testValue = 'yes';
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+      expect(radioGroup.componentInstance.value).toBe(testValue);
     });
   });
 });
