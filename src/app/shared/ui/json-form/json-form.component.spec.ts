@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
+import { CheckboxGroupComponentModule } from '../checkbox-group/checkbox-group.module';
+import { CheckboxComponentModule } from '../checkbox/checkbox.module';
 
 import { JsonFormComponent, JsonFormData } from './json-form.component';
 
@@ -14,7 +16,12 @@ describe('JsonFormComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [JsonFormComponent],
-        imports: [IonicModule.forRoot(), ReactiveFormsModule],
+        imports: [
+          IonicModule.forRoot(),
+          ReactiveFormsModule,
+          CheckboxComponentModule,
+          CheckboxGroupComponentModule,
+        ],
       })
         .overrideComponent(JsonFormComponent, {
           set: { changeDetection: ChangeDetectionStrategy.Default },
@@ -62,42 +69,6 @@ describe('JsonFormComponent', () => {
         .get(testFormData.controls[0].name)
         .setValue(testValue);
       expect(dateControl.componentInstance.value).toBe(testValue);
-    });
-
-    it('can render a checkbox input', () => {
-      const testFormData: JsonFormData = {
-        controls: [
-          {
-            name: 'checkbox',
-            label: 'Checkbox',
-            type: 'checkbox',
-            options: {
-              items: [
-                { label: 'Yes', value: 'yes' },
-                { label: 'No', value: 'no' },
-              ],
-            },
-            validators: {},
-          },
-        ],
-      };
-
-      component.formData = testFormData;
-      component.ngOnChanges();
-      fixture.detectChanges();
-
-      // Should render
-      const checkboxControl = fixture.debugElement.query(
-        By.css('ion-checkbox')
-      );
-      expect(checkboxControl).toBeTruthy();
-
-      // Should be bound to control
-      const testValue = '123';
-      component.formGroup
-        .get(testFormData.controls[0].name)
-        .setValue(testValue);
-      expect(checkboxControl.componentInstance.value).toBe(testValue);
     });
 
     it('can render a range input', () => {
@@ -199,6 +170,48 @@ describe('JsonFormComponent', () => {
         .get(testFormData.controls[0].name)
         .setValue(testValue);
       expect(radioGroup.componentInstance.value).toBe(testValue);
+    });
+
+    it('can render groups of checkboxes', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'checkbox',
+            label: 'Checkbox',
+            type: 'checkbox',
+            options: {
+              items: [
+                { label: 'Yes', value: 'yes' },
+                { label: 'No', value: 'no' },
+              ],
+            },
+            validators: {},
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const checkboxGroup = fixture.debugElement.query(
+        By.css('app-checkbox-group')
+      );
+      const checkboxItems = fixture.debugElement.queryAll(
+        By.css('app-checkbox')
+      );
+
+      // Should render
+      expect(checkboxGroup).toBeTruthy();
+      expect(checkboxItems.length).toBe(2);
+
+      // Should be bound to control
+      const testValue = ['yes'];
+      component.formGroup
+        .get(testFormData.controls[0].name)
+        .setValue(testValue);
+
+      expect(checkboxGroup.componentInstance.selectedValues).toBe(testValue);
     });
   });
 });

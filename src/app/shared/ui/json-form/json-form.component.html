@@ -23,11 +23,16 @@
       ></ion-icon>
       <ion-icon slot="end" [name]="control.options.icon"></ion-icon>
     </ion-range>
-    <ion-checkbox
+    <app-checkbox-group
       *ngIf="control.type === 'checkbox'"
       [formControlName]="control.name"
-      [checked]="control.value"
-    ></ion-checkbox>
+    >
+      <app-checkbox
+        [value]="item.value"
+        [label]="item.label"
+        *ngFor="let item of control.options.items"
+      ></app-checkbox>
+    </app-checkbox-group>
     <ion-radio-group
       *ngIf="control.type === 'radio'"
       [formControlName]="control.name"
