@@ -1,0 +1,7 @@
+<ion-item (click)="checkboxGroup.toggleValue(value)" button detail="false">
+  <ion-label>{{ label }}</ion-label>
+  <ion-checkbox
+    [checked]="checkboxGroup.isSelected(value)"
+    [disabled]="true"
+  ></ion-checkbox>
+</ion-item>

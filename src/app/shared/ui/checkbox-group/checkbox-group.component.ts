@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,12 +16,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CheckboxGroupComponent implements ControlValueAccessor {
   selectedValues: string[] = [];
 
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
   onChange = (selectedValues: string[]) => {};
   onTouch = () => {};
 
   // Allow Angular to set the value on the component
   writeValue(selectedValues: string[]): void {
-    this.selectedValues = selectedValues;
+    this.selectedValues = selectedValues || [];
+    this.changeDetectorRef.markForCheck();
   }
 
   // Save a reference to the change function passed to us by
@@ -50,5 +53,9 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
 
     this.onChange(this.selectedValues);
     this.onTouch();
+  }
+
+  isSelected(value: string) {
+    return this.selectedValues.includes(value);
   }
 }

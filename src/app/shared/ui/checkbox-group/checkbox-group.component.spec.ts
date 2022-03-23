@@ -76,4 +76,24 @@ describe('CheckboxGroupComponent', () => {
       expect(component.onTouch).toHaveBeenCalled();
     });
   });
+
+  describe('isSelected()', () => {
+    it('should return true if value is in selectedValues', () => {
+      const testValue = 'test';
+      component.selectedValues = [testValue];
+
+      const result = component.isSelected(testValue);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false if value is not selectedValues', () => {
+      const testValue = 'test';
+      component.selectedValues = [testValue];
+
+      const result = component.isSelected('somethingelse');
+
+      expect(result).toBe(false);
+    });
+  });
 });
