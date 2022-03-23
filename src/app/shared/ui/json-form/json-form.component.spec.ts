@@ -225,5 +225,257 @@ describe('JsonFormComponent', () => {
 
       expect(observerSpy.getValuesLength()).toEqual(1);
     });
+
+    it('should not emit for validation error: min', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '4',
+            type: 'textarea',
+            validators: {
+              min: 5,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: max', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '4',
+            type: 'textarea',
+            validators: {
+              max: 3,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: required', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '',
+            type: 'textarea',
+            validators: {
+              required: true,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: requiredTrue', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: 'a value that is not true',
+            type: 'textarea',
+            validators: {
+              requiredTrue: true,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: email', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '123',
+            type: 'textarea',
+            validators: {
+              email: true,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: minLength', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '123',
+            type: 'textarea',
+            validators: {
+              minLength: 5,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: maxLength', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '123',
+            type: 'textarea',
+            validators: {
+              maxLength: 2,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should not emit for validation error: pattern', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '123',
+            type: 'textarea',
+            validators: {
+              pattern: '[a-zA-Z ]*',
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(0);
+    });
+
+    it('should display an error message after failed submission', () => {
+      const testFormData: JsonFormData = {
+        controls: [
+          {
+            name: 'textarea',
+            label: 'Textarea',
+            value: '123',
+            type: 'textarea',
+            validators: {
+              email: true,
+            },
+          },
+        ],
+      };
+
+      component.formData = testFormData;
+      component.ngOnChanges();
+      fixture.detectChanges();
+
+      const beforeSubmission = fixture.debugElement.query(
+        By.css('[data-test="form-error-message"]')
+      );
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      fixture.detectChanges();
+
+      const afterSubmission = fixture.debugElement.query(
+        By.css('[data-test="form-error-message"]')
+      );
+
+      expect(beforeSubmission).toBeFalsy();
+      expect(afterSubmission).toBeTruthy();
+    });
   });
 });
