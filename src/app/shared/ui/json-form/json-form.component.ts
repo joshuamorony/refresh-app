@@ -6,7 +6,7 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface JsonFormValidators {
   min?: number;
@@ -59,9 +59,62 @@ export class JsonFormComponent implements OnChanges {
     this.createForm();
   }
 
+  saveForm() {
+    if (this.formGroup.valid) {
+      this.save.emit(true);
+    }
+  }
+
   createForm() {
     for (const control of this.formData.controls) {
-      this.formGroup.addControl(control.name, new FormControl(control.value));
+      const validatorsToAdd = [];
+
+      for (const [key, value] of Object.entries(control.validators)) {
+        switch (key) {
+          case 'min':
+            validatorsToAdd.push(Validators.min(value));
+            break;
+          case 'max':
+            validatorsToAdd.push(Validators.max(value));
+            break;
+          case 'required':
+            if (value) {
+              validatorsToAdd.push(Validators.required);
+            }
+            break;
+          case 'requiredTrue':
+            if (value) {
+              validatorsToAdd.push(Validators.requiredTrue);
+            }
+            break;
+          case 'email':
+            if (value) {
+              validatorsToAdd.push(Validators.email);
+            }
+            break;
+          case 'minLength':
+            validatorsToAdd.push(Validators.minLength(value));
+            break;
+          case 'maxLength':
+            validatorsToAdd.push(Validators.maxLength(value));
+            break;
+          case 'pattern':
+            validatorsToAdd.push(Validators.pattern(value));
+            break;
+          case 'nullValidator':
+            if (value) {
+              validatorsToAdd.push(Validators.nullValidator);
+            }
+            break;
+          default:
+            break;
+        }
+      }
+
+      this.formGroup.addControl(
+        control.name,
+        new FormControl(control.value, validatorsToAdd)
+      );
     }
   }
 }

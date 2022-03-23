@@ -466,7 +466,9 @@ describe('JsonFormComponent', () => {
       );
 
       const form = fixture.debugElement.query(By.css('form'));
-      form.triggerEventHandler('ngSubmit', null);
+
+      // Manually trigger submit since ion-button won't work with "submit" in tests
+      form.nativeElement.submit();
 
       fixture.detectChanges();
 

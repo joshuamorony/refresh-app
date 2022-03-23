@@ -26,24 +26,24 @@ describe('CheckboxGroupComponent', () => {
 
   describe('writeValue()', () => {
     it('should update value', () => {
-      const testvalue = ['test1', 'test2'];
+      const testValue = ['test1', 'test2'];
 
-      component.writeValue(testvalue);
+      component.writeValue(testValue);
 
-      expect(component.value).toBe(testvalue);
+      expect(component.value).toBe(testValue);
     });
   });
 
   describe('toggleValue()', () => {
     it('should add value to value if not already in the array', () => {
-      const originalvalue = [];
-      component.value = originalvalue;
+      const originalValue = [];
+      component.value = originalValue;
 
       const testValue = 'test';
 
       component.toggleValue(testValue);
 
-      expect(component.value).toEqual([...originalvalue, testValue]);
+      expect(component.value).toEqual([...originalValue, testValue]);
     });
 
     it('should remove value from value if already in the array', () => {

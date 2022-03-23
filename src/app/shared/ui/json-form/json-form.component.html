@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" (ngSubmit)="save.emit(true)">
+<form [formGroup]="formGroup" (ngSubmit)="saveForm()" #jsonForm="ngForm">
   <ion-item *ngFor="let control of formData.controls">
     <ion-label *ngIf="control.label !== ''">{{ control.label }}</ion-label>
     <ion-datetime
@@ -44,6 +44,12 @@
       </ion-item>
     </ion-radio-group>
   </ion-item>
+  <p
+    data-test="form-error-message"
+    *ngIf="formGroup.invalid && jsonForm.submitted"
+  >
+    Some fields are invalid, please fix them to submit the form.
+  </p>
   <ion-button data-test="save-form-button" expand="full" type="submit">
     Save
     <ion-icon slot="start" name="save-outline"></ion-icon>
