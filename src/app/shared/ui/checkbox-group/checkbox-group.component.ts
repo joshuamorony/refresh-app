@@ -14,22 +14,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class CheckboxGroupComponent implements ControlValueAccessor {
-  selectedValues: string[] = [];
+  value: string[] = [];
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
-  onChange = (selectedValues: string[]) => {};
+  onChange = (value: string[]) => {};
   onTouch = () => {};
 
   // Allow Angular to set the value on the component
-  writeValue(selectedValues: string[]): void {
-    this.selectedValues = selectedValues || [];
+  writeValue(value: string[]): void {
+    this.value = value || [];
     this.changeDetectorRef.markForCheck();
   }
 
   // Save a reference to the change function passed to us by
   // the Angular form control
-  registerOnChange(fn: (selectedValues: string[]) => void): void {
+  registerOnChange(fn: (value: string[]) => void): void {
     this.onChange = fn;
   }
 
@@ -39,23 +39,23 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
-  toggleValue(value: string) {
-    const index = this.selectedValues.indexOf(value);
+  toggleValue(selectedValue: string) {
+    const index = this.value.indexOf(selectedValue);
 
     if (index > -1) {
-      this.selectedValues = [
-        ...this.selectedValues.slice(0, index),
-        ...this.selectedValues.slice(index + 1),
+      this.value = [
+        ...this.value.slice(0, index),
+        ...this.value.slice(index + 1),
       ];
     } else {
-      this.selectedValues = [...this.selectedValues, value];
+      this.value = [...this.value, selectedValue];
     }
 
-    this.onChange(this.selectedValues);
+    this.onChange(this.value);
     this.onTouch();
   }
 
-  isSelected(value: string) {
-    return this.selectedValues.includes(value);
+  isSelected(valueToCheck: string) {
+    return this.value.includes(valueToCheck);
   }
 }

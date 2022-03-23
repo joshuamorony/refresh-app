@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
 import { CheckboxGroupComponentModule } from '../checkbox-group/checkbox-group.module';
 import { CheckboxComponentModule } from '../checkbox/checkbox.module';
@@ -211,7 +212,18 @@ describe('JsonFormComponent', () => {
         .get(testFormData.controls[0].name)
         .setValue(testValue);
 
-      expect(checkboxGroup.componentInstance.selectedValues).toBe(testValue);
+      expect(checkboxGroup.componentInstance.value).toBe(testValue);
+    });
+  });
+
+  describe('submission and validation', () => {
+    it('should emit an event when the form is submitted', () => {
+      const observerSpy = subscribeSpyTo(component.save);
+
+      const form = fixture.debugElement.query(By.css('form'));
+      form.triggerEventHandler('ngSubmit', null);
+
+      expect(observerSpy.getValuesLength()).toEqual(1);
     });
   });
 });

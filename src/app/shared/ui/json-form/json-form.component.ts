@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -48,6 +50,8 @@ export interface JsonFormData {
 export class JsonFormComponent implements OnChanges {
   @Input() formData: JsonFormData;
   @Input() formGroup: FormGroup;
+
+  @Output() save = new EventEmitter<boolean>();
 
   constructor() {}
 

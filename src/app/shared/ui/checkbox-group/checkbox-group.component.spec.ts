@@ -25,46 +25,43 @@ describe('CheckboxGroupComponent', () => {
   });
 
   describe('writeValue()', () => {
-    it('should update selectedValues', () => {
-      const testSelectedValues = ['test1', 'test2'];
+    it('should update value', () => {
+      const testvalue = ['test1', 'test2'];
 
-      component.writeValue(testSelectedValues);
+      component.writeValue(testvalue);
 
-      expect(component.selectedValues).toBe(testSelectedValues);
+      expect(component.value).toBe(testvalue);
     });
   });
 
   describe('toggleValue()', () => {
-    it('should add value to selectedValues if not already in the array', () => {
-      const originalSelectedValues = [];
-      component.selectedValues = originalSelectedValues;
+    it('should add value to value if not already in the array', () => {
+      const originalvalue = [];
+      component.value = originalvalue;
 
       const testValue = 'test';
 
       component.toggleValue(testValue);
 
-      expect(component.selectedValues).toEqual([
-        ...originalSelectedValues,
-        testValue,
-      ]);
+      expect(component.value).toEqual([...originalvalue, testValue]);
     });
 
-    it('should remove value from selectedValues if already in the array', () => {
+    it('should remove value from value if already in the array', () => {
       const testValue = 'test';
-      component.selectedValues = [testValue];
+      component.value = [testValue];
 
       component.toggleValue(testValue);
 
-      expect(component.selectedValues.indexOf(testValue)).toBe(-1);
+      expect(component.value.indexOf(testValue)).toBe(-1);
     });
 
-    it('should pass selectedValues to onChange method', () => {
+    it('should pass value to onChange method', () => {
       jest.spyOn(component, 'onChange');
 
       const testValue = 'test';
       component.toggleValue(testValue);
 
-      expect(component.onChange).toHaveBeenCalledWith(component.selectedValues);
+      expect(component.onChange).toHaveBeenCalledWith(component.value);
     });
 
     it('should call the onTouch method', () => {
@@ -78,18 +75,18 @@ describe('CheckboxGroupComponent', () => {
   });
 
   describe('isSelected()', () => {
-    it('should return true if value is in selectedValues', () => {
+    it('should return true if value is in value', () => {
       const testValue = 'test';
-      component.selectedValues = [testValue];
+      component.value = [testValue];
 
       const result = component.isSelected(testValue);
 
       expect(result).toBe(true);
     });
 
-    it('should return false if value is not selectedValues', () => {
+    it('should return false if value is not value', () => {
       const testValue = 'test';
-      component.selectedValues = [testValue];
+      component.value = [testValue];
 
       const result = component.isSelected('somethingelse');
 
