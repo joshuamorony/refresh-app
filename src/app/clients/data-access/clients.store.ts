@@ -27,6 +27,11 @@ export interface ClientsState {
   clients: Client[];
 }
 
+export interface Feedback {
+  id: string;
+  response: string;
+}
+
 @Injectable({
   providedIn: ClientShellModule,
 })
