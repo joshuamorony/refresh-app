@@ -35,8 +35,6 @@ describe('ClientsService', () => {
       ],
     });
     service = TestBed.inject(ClientsService);
-
-    service = TestBed.inject(ClientsService);
     firestore = TestBed.inject(AngularFireFirestore.Firestore);
     authService = TestBed.inject(AuthService);
   });

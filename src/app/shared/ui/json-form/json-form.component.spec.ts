@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -8,6 +14,16 @@ import { CheckboxGroupComponentModule } from '../checkbox-group/checkbox-group.m
 import { CheckboxComponentModule } from '../checkbox/checkbox.module';
 
 import { JsonFormComponent, JsonFormData } from './json-form.component';
+
+@Component({
+  selector: 'app-json-form',
+  template: '',
+})
+export class MockJsonFormComponent {
+  @Input() formData: any;
+  @Input() formGroup: any;
+  @Output() save = new EventEmitter<boolean>();
+}
 
 describe('JsonFormComponent', () => {
   let component: JsonFormComponent;

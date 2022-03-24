@@ -5,8 +5,18 @@
 </ion-header>
 
 <ion-content>
-  <app-json-form
-    [formGroup]="feedbackForm"
-    [formData]="feedbackFormData"
-  ></app-json-form>
+  <p
+    *ngIf="feedbackFormSubmitted$ | async; else jsonForm"
+    data-test="thankyou-message"
+  >
+    Thank you for your feedback!
+  </p>
+  <ng-template #jsonForm>
+    <app-json-form
+      (save)="save()"
+      data-test="feedback-form"
+      [formGroup]="feedbackForm"
+      [formData]="feedbackFormData"
+    ></app-json-form>
+  </ng-template>
 </ion-content>
