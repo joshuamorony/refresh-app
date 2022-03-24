@@ -39,10 +39,12 @@ describe('Firestore security rules', () => {
 
       const existingClientDocRef = doc(db, 'clients', 'existingDoc');
       const existingNoteDocRef = doc(db, 'notes', 'existingDoc');
+      const existingFeedbackDocRef = doc(db, 'feedback', 'existingDoc');
 
       await Promise.all([
         setDoc(existingClientDocRef, { foo: 'bar' }),
         setDoc(existingNoteDocRef, { foo: 'bar' }),
+        setDoc(existingFeedbackDocRef, { foo: 'bar' }),
       ]);
     });
   });
@@ -96,6 +98,19 @@ describe('Firestore security rules', () => {
       assertSucceeds(setDoc(newDoc, { foo: 'bar' })), // create
       assertSucceeds(setDoc(existingDoc, { foo: 'bar' })), // update
       assertSucceeds(deleteDoc(existingDoc)), // delete
+    ]);
+  });
+
+  it('unauthenticated users can ONLY create documents in the feedback collection', async () => {
+    const db = getFirestore();
+    const newDoc = doc(db, 'feedback', 'testDoc');
+    const existingDoc = doc(db, 'feedback', 'existingDoc');
+
+    await Promise.all([
+      assertFails(getDoc(existingDoc)), //read
+      assertSucceeds(setDoc(newDoc, { foo: 'bar' })), // create
+      assertFails(setDoc(existingDoc, { foo: 'bar' })), // update
+      assertFails(deleteDoc(existingDoc)), // delete
     ]);
   });
 
