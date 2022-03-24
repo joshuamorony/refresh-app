@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p
+    *ngIf="feedbackFormSubmitted$ | async; else jsonForm"
+    data-test="thankyou-message"
+  >
+    Thank you for your feedback!
+  </p>
+  <ng-template #jsonForm>
+    <app-json-form
+      (save)="save()"
+      data-test="feedback-form"
+      [formGroup]="feedbackForm"
+      [formData]="feedbackFormData"
+    ></app-json-form>
+  </ng-template>
+</ion-content>
