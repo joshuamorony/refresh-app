@@ -31,3 +31,9 @@ export const getClientDetailBackButton = () =>
   cy.get('[data-test="client-detail-back-button"]');
 export const getDeleteButton = () => cy.get('[data-test="delete-button"]');
 export const getConfirmButton = () => cy.get('#confirm-delete');
+
+// Feedback
+export const getForm = () => cy.get('[data-test="feedback-form"]');
+export const getSubmitButton = () => cy.get('[data-test="submit-button"]');
+export const getThankYouMessage = () =>
+  cy.get('[data-test="thankyou-message"]');

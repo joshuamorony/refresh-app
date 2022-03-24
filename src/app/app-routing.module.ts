@@ -19,6 +19,10 @@ const routes: Routes = [
         (m) => m.ClientShellModule
       ),
   },
+  {
+    path: 'feedback',
+    loadChildren: () => import('./feedback/feature/feedback/feedback.module').then( m => m.FeedbackPageModule)
+  },
 ];
 
 @NgModule({
