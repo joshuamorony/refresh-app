@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
+import { FeedbackService } from '../../feedback/data-access/feedback.service';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
 import { ClientsService } from './clients.service';
 
@@ -24,13 +24,14 @@ export interface Client {
   survey: SurveyResponse[];
 }
 
-export interface ClientsState {
-  clients: Client[];
-}
-
 export interface Feedback {
   id: string;
   response: string;
+}
+
+export interface ClientsState {
+  clients: Client[];
+  feedbacks: Feedback[];
 }
 
 @Injectable({
@@ -38,6 +39,7 @@ export interface Feedback {
 })
 export class ClientsStore extends ComponentStore<ClientsState> {
   readonly clients$ = this.select((state) => state.clients);
+  readonly feedbacks$ = this.select((state) => state.feedbacks);
 
   loadClients = this.effect(($) =>
     $.pipe(
@@ -52,9 +54,23 @@ export class ClientsStore extends ComponentStore<ClientsState> {
     )
   );
 
-  loadFeedbacks = this.effect(($) => of());
+  loadFeedbacks = this.effect(($) =>
+    $.pipe(
+      first(),
+      switchMap(() =>
+        this.feedbackService.getFeedbacks().pipe(
+          tap({
+            next: (feedbacks) => this.patchState({ feedbacks }),
+          })
+        )
+      )
+    )
+  );
 
-  constructor(private clientsService: ClientsService) {
-    super({ clients: null });
+  constructor(
+    private clientsService: ClientsService,
+    private feedbackService: FeedbackService
+  ) {
+    super({ clients: null, feedbacks: null });
   }
 }
