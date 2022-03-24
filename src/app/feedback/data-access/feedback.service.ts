@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
-import { of } from 'rxjs';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  Firestore,
+} from '@angular/fire/firestore';
+import { concat, Observable, of, throwError } from 'rxjs';
+import { catchError, filter, retryWhen, switchMap } from 'rxjs/operators';
+import { Feedback } from '../../clients/data-access/clients.store';
+import { AuthService } from '../../shared/data-access/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FeedbackService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private authService: AuthService) {}
 
   public saveFeedback(response: any) {
     const feedbackCollection = collection(this.firestore, 'feedback');
@@ -16,6 +24,18 @@ export class FeedbackService {
   }
 
   public getFeedbacks() {
-    return of([]);
+    const feedbackCollection = collection(this.firestore, 'feedback');
+    return collectionData(feedbackCollection, { idField: 'id' }).pipe(
+      // Emit null before erroring to clear feedback data in store, then rethrow error
+      catchError((err) => concat(of(null), throwError(err))),
+      // Restart stream when user logs back in
+      retryWhen((errors) =>
+        errors.pipe(
+          switchMap(() =>
+            this.authService.getLoggedIn().pipe(filter((user) => !!user))
+          )
+        )
+      )
+    ) as Observable<Feedback[]>;
   }
 }
