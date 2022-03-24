@@ -1,0 +1,57 @@
+<form [formGroup]="formGroup" (ngSubmit)="saveForm()" #jsonForm="ngForm">
+  <ion-item *ngFor="let control of formData.controls">
+    <ion-label *ngIf="control.label !== ''">{{ control.label }}</ion-label>
+    <ion-datetime
+      *ngIf="control.type === 'date'"
+      [formControlName]="control.name"
+    ></ion-datetime>
+    <ion-textarea
+      *ngIf="control.type === 'textarea'"
+      [formControlName]="control.name"
+      [value]="control.value"
+    ></ion-textarea>
+    <ion-range
+      *ngIf="control.type === 'range'"
+      [min]="control.options.min"
+      [max]="control.options.max"
+      [formControlName]="control.name"
+    >
+      <ion-icon
+        size="small"
+        slot="start"
+        [name]="control.options.icon"
+      ></ion-icon>
+      <ion-icon slot="end" [name]="control.options.icon"></ion-icon>
+    </ion-range>
+    <app-checkbox-group
+      *ngIf="control.type === 'checkbox'"
+      [formControlName]="control.name"
+    >
+      <app-checkbox
+        [value]="item.value"
+        [label]="item.label"
+        *ngFor="let item of control.options.items"
+      ></app-checkbox>
+    </app-checkbox-group>
+    <ion-radio-group
+      *ngIf="control.type === 'radio'"
+      [formControlName]="control.name"
+      [value]="control.value"
+    >
+      <ion-item *ngFor="let item of control.options.items">
+        <ion-label>{{ item.label }}</ion-label>
+        <ion-radio [value]="item.value"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-item>
+  <p
+    data-test="form-error-message"
+    *ngIf="formGroup.invalid && jsonForm.submitted"
+  >
+    Some fields are invalid, please fix them to submit the form.
+  </p>
+  <ion-button data-test="save-form-button" expand="full" type="submit">
+    Save
+    <ion-icon slot="start" name="save-outline"></ion-icon>
+  </ion-button>
+</form>
