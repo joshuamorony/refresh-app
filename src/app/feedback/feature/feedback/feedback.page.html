@@ -5,12 +5,16 @@
 </ion-header>
 
 <ion-content>
-  <p
-    *ngIf="feedbackFormSubmitted$ | async; else jsonForm"
-    data-test="thankyou-message"
+  <ng-container
+    *ngIf="feedbackFormSubmitted$ | async as submission; else jsonForm"
   >
-    Thank you for your feedback!
-  </p>
+    <p *ngIf="submission === 'success'" data-test="thankyou-message">
+      Thank you for your feedback!
+    </p>
+    <p *ngIf="submission === 'error'" data-test="error-message">
+      Sorry, the form could not be submitted!
+    </p>
+  </ng-container>
   <ng-template #jsonForm>
     <app-json-form
       (save)="save()"
