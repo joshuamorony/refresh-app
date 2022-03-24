@@ -23,6 +23,10 @@ const routes: Routes = [
         (m) => m.ClientDetailPageModule
       ),
   },
+  {
+    path: 'feedback',
+    loadChildren: () => import('../client-feedback/client-feedback.module').then( m => m.ClientFeedbackPageModule)
+  },
 ];
 
 @NgModule({

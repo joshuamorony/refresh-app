@@ -19,6 +19,8 @@ import {
   getPhoneField,
   getSaveButton,
   getTitle,
+  getViewFeedbackBackButton,
+  getViewFeedbackButton,
 } from '../support/utils';
 
 describe('Clients', () => {
@@ -28,6 +30,7 @@ describe('Clients', () => {
     cy.login();
     cy.visit('/clients');
     cy.callFirestore('delete', 'clients');
+    cy.callFirestore('delete', 'feedback');
   });
 
   it('can see a list of clients', () => {
@@ -144,6 +147,38 @@ describe('Clients', () => {
     getConfirmButton().click();
 
     getItemsInList().should('not.exist');
+  });
+
+  it('can view feedback', () => {
+    const feedback = {
+      response: '{"someProperty": "someValue"}',
+    };
+
+    cy.callFirestore('set', 'feedback/abc123', feedback);
+
+    getViewFeedbackButton().click();
+    getItemsInList().first().click();
+
+    cy.contains('someValue');
+  });
+
+  it('can navigate back to the clients page from the feedback page', () => {
+    const feedback = {
+      response: '{}',
+    };
+
+    cy.callFirestore('set', 'feedback/abc123', feedback);
+
+    getViewFeedbackButton().click();
+    getItemsInList().first().click();
+
+    getViewFeedbackBackButton().click();
+
+    getTitle().should('contain.text', 'Feedback');
+
+    getViewFeedbackBackButton().click();
+
+    getTitle().should('contain.text', 'Clients');
   });
 
   it('can log out', () => {
