@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
 import { ClientsService } from './clients.service';
@@ -50,6 +51,8 @@ export class ClientsStore extends ComponentStore<ClientsState> {
       )
     )
   );
+
+  loadFeedbacks = this.effect(($) => of());
 
   constructor(private clientsService: ClientsService) {
     super({ clients: null });

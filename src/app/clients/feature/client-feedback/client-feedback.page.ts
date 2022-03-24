@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ClientsStore } from '../../data-access/clients.store';
 
 @Component({
   selector: 'app-client-feedback',
   templateUrl: './client-feedback.page.html',
   styleUrls: ['./client-feedback.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientFeedbackPage implements OnInit {
-
-  params: Params;
-
-  constructor(private route: ActivatedRoute) { }
+  constructor(private clientsStore: ClientsStore) {}
 
   ngOnInit() {
-    this.params = this.route.snapshot.params;
+    this.clientsStore.loadFeedbacks();
   }
-
 }
