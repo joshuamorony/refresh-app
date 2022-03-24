@@ -3,6 +3,10 @@ service cloud.firestore {
 
   match /databases/{database}/documents {
 
+    match /feedback/{feedbackId}{
+      allow create: if true;
+    }
+
     match /{document=**} {
       allow read, write: if isAdmin();
     }

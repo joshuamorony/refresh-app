@@ -14,12 +14,16 @@ import { FeedbackService } from '../../data-access/feedback.service';
 export class FeedbackPage {
   feedbackForm = new FormGroup({});
   feedbackFormData: JsonFormData = feedbackFormData;
-  feedbackFormSubmitted$ = new BehaviorSubject<boolean>(null);
+  feedbackFormSubmitted$ = new BehaviorSubject<'success' | 'error'>(null);
 
   constructor(private feedbackService: FeedbackService) {}
 
-  save() {
-    this.feedbackFormSubmitted$.next(true);
-    this.feedbackService.saveFeedback(this.feedbackForm.value);
+  async save() {
+    try {
+      await this.feedbackService.saveFeedback(this.feedbackForm.value);
+      this.feedbackFormSubmitted$.next('success');
+    } catch (err) {
+      this.feedbackFormSubmitted$.next('error');
+    }
   }
 }

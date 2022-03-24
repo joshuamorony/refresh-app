@@ -43,4 +43,22 @@ describe('FeedbackPage', () => {
       component.feedbackForm.value
     );
   });
+
+  it('should display an error message if saveFeedback throws error', async () => {
+    const feedbackService = fixture.debugElement.injector.get(FeedbackService);
+    jest.spyOn(feedbackService, 'saveFeedback').mockRejectedValue('error');
+
+    await component.save();
+    fixture.detectChanges();
+
+    const errorMessage = fixture.debugElement.query(
+      By.css('[data-test="error-message"]')
+    );
+    const successMessage = fixture.debugElement.query(
+      By.css('[data-test="thankyou-message"]')
+    );
+
+    expect(errorMessage).toBeTruthy();
+    expect(successMessage).toBeFalsy();
+  });
 });
