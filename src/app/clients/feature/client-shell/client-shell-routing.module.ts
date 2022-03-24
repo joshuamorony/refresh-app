@@ -17,15 +17,18 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'feedback',
+    loadChildren: () =>
+      import('../client-feedback/client-feedback.module').then(
+        (m) => m.ClientFeedbackPageModule
+      ),
+  },
+  {
     path: ':id',
     loadChildren: () =>
       import('../client-detail/client-detail.module').then(
         (m) => m.ClientDetailPageModule
       ),
-  },
-  {
-    path: 'feedback',
-    loadChildren: () => import('../client-feedback/client-feedback.module').then( m => m.ClientFeedbackPageModule)
   },
 ];
 
