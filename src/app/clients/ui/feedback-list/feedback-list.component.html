@@ -1,0 +1,26 @@
+<ion-list
+  lines="none"
+  data-test="feedback-list"
+  *ngIf="feedbacks; else loading"
+>
+  <p data-test="no-feedbacks-message" *ngIf="!feedbacks.length">
+    No feedback has been left
+  </p>
+  <ion-item
+    *ngFor="let feedback of feedbacks"
+    button
+    routerLink="{{ feedback.id }}"
+    routerDirection="forward"
+  >
+    <ion-label>Client Feedback</ion-label>
+  </ion-item>
+</ion-list>
+<ng-template #loading>
+  <ion-list lines="none" data-test="feedback-loading">
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>

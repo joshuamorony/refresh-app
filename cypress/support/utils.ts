@@ -37,3 +37,11 @@ export const getForm = () => cy.get('[data-test="feedback-form"]');
 export const getSubmitButton = () => cy.get('[data-test="save-form-button"]');
 export const getThankYouMessage = () =>
   cy.get('[data-test="thankyou-message"]');
+export const getViewFeedbackButton = () =>
+  cy.get('[data-test="view-feedback-button"]');
+export const getViewFeedbackBackButton = () =>
+  cy.get('[data-test="view-feedback-back-button"]');
+export const getViewFeedbackDetailBackButton = () =>
+  cy.get('[data-test="view-feedback-detail-back-button"]');
+export const getItemsInFeedbackList = () =>
+  cy.get('[data-test="feedback-list"] ion-item');

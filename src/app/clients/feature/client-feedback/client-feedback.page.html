@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feedback</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/clients"
+        data-test="view-feedback-back-button"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="{ feedbacks: clientsStore.feedbacks$ | async } as vm">
+    <app-feedback-list [feedbacks]="vm.feedbacks"></app-feedback-list>
+  </ng-container>
+</ion-content>

@@ -22,4 +22,14 @@
   <ng-container *ngIf="{ clients: clientsStore.clients$ | async } as vm">
     <app-client-list [clients]="vm.clients"></app-client-list>
   </ng-container>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button
+      data-test="view-feedback-button"
+      class="feedback-button"
+      routerLink="feedback"
+      routerDirection="forward"
+    >
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
