@@ -22,6 +22,7 @@ import {
   getTitle,
   getViewFeedbackBackButton,
   getViewFeedbackButton,
+  getViewFeedbackDetailBackButton,
 } from '../support/utils';
 
 describe('Clients', () => {
@@ -173,10 +174,7 @@ describe('Clients', () => {
     getViewFeedbackButton().click();
     getItemsInFeedbackList().first().click();
 
-    getViewFeedbackBackButton().click();
-
-    getTitle().should('contain.text', 'Feedback');
-
+    getViewFeedbackDetailBackButton().click();
     getViewFeedbackBackButton().click();
 
     getTitle().should('contain.text', 'Clients');
