@@ -11,4 +11,8 @@ export class ClientListComponent {
   @Input() clients: Client[];
 
   constructor() {}
+
+  trackByFn(index: number, client: Client) {
+    return client.id;
+  }
 }

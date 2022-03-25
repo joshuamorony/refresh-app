@@ -3,7 +3,7 @@
     No clients. Click the add button to begin!
   </p>
   <ion-item
-    *ngFor="let client of clients"
+    *ngFor="let client of clients; trackBy: trackByFn"
     button
     routerLink="/clients/{{ client.id }}"
     routerDirection="forward"

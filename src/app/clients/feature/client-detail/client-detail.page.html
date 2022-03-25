@@ -29,11 +29,12 @@
     <app-client-detail-card [client]="vm.client"> </app-client-detail-card>
     <ion-button
       data-test="delete-button"
-      color="danger"
+      class="delete-client"
+      color="primary"
       fill="outline"
       (click)="deleteClient(vm.client)"
     >
-      Delete Client
+      <ion-icon name="trash"></ion-icon> Delete Client
     </ion-button>
   </ng-container>
 </ion-content>

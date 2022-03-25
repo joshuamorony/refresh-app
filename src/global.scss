@@ -27,9 +27,9 @@
 
 ion-header {
   ion-toolbar {
-    --background: transparent;
     --border-style: none;
-    margin: 50px 0;
+    padding-top: 50px !important;
+    padding-bottom: 50px;
   }
 }
 

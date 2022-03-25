@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ng-container *ngIf="{ feedbacks: clientsStore.feedbacks$ | async } as vm">
     <app-feedback-list [feedbacks]="vm.feedbacks"></app-feedback-list>
   </ng-container>
