@@ -8,6 +8,7 @@ import {
   getEmailDisplay,
   getEmailField,
   getFirstNameField,
+  getItemsInFeedbackList,
   getItemsInList,
   getLastNameField,
   getLoginButton,
@@ -157,7 +158,7 @@ describe('Clients', () => {
     cy.callFirestore('set', 'feedback/abc123', feedback);
 
     getViewFeedbackButton().click();
-    getItemsInList().first().click();
+    getItemsInFeedbackList().first().click();
 
     cy.contains('someValue');
   });
@@ -170,7 +171,7 @@ describe('Clients', () => {
     cy.callFirestore('set', 'feedback/abc123', feedback);
 
     getViewFeedbackButton().click();
-    getItemsInList().first().click();
+    getItemsInFeedbackList().first().click();
 
     getViewFeedbackBackButton().click();
 

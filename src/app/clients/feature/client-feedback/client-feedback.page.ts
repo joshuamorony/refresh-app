@@ -8,7 +8,7 @@ import { ClientsStore } from '../../data-access/clients.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientFeedbackPage implements OnInit {
-  constructor(private clientsStore: ClientsStore) {}
+  constructor(public clientsStore: ClientsStore) {}
 
   ngOnInit() {
     this.clientsStore.loadFeedbacks();

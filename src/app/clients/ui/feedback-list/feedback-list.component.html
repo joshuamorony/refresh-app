@@ -9,7 +9,7 @@
   <ion-item
     *ngFor="let feedback of feedbacks"
     button
-    routerLink="feedback/{{ feedback.id }}"
+    routerLink="{{ feedback.id }}"
     routerDirection="forward"
   >
     <ion-label>Client Feedback</ion-label>

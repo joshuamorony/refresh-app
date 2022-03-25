@@ -41,3 +41,5 @@ export const getViewFeedbackButton = () =>
   cy.get('[data-test="view-feedback-button"]');
 export const getViewFeedbackBackButton = () =>
   cy.get('[data-test="view-feedback-back-button"]');
+export const getItemsInFeedbackList = () =>
+  cy.get('[data-test="feedback-list"] ion-item');

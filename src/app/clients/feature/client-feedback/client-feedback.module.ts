@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ClientFeedbackPageRoutingModule } from './client-feedback-routing.module';
 
 import { ClientFeedbackPage } from './client-feedback.page';
+import { FeedbackListComponentModule } from '../../ui/feedback-list/feedback-list.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientFeedbackPageRoutingModule
+    ClientFeedbackPageRoutingModule,
+    FeedbackListComponentModule,
   ],
-  declarations: [ClientFeedbackPage]
+  declarations: [ClientFeedbackPage],
 })
 export class ClientFeedbackPageModule {}

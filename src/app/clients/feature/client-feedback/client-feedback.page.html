@@ -5,5 +5,7 @@
 </ion-header>
 
 <ion-content>
-
+  <ng-container *ngIf="{ feedbacks: clientsStore.feedbacks$ | async } as vm">
+    <app-feedback-list [feedbacks]="vm.feedbacks"></app-feedback-list>
+  </ng-container>
 </ion-content>

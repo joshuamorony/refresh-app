@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>ClientFeedbackDetail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/clients/feedback"
+        data-test="view-feedback-detail-back-button"
+      ></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div *ngIf="feedback$ | async as feedback">
+    <pre>{{feedback | json }}</pre>
+  </div>
 </ion-content>
