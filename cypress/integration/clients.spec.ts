@@ -18,6 +18,7 @@ import {
   getNotesField,
   getPhoneDisplay,
   getPhoneField,
+  getRenderJsonValue,
   getSaveButton,
   getTitle,
   getViewFeedbackBackButton,
@@ -161,7 +162,7 @@ describe('Clients', () => {
     getViewFeedbackButton().click();
     getItemsInFeedbackList().first().click();
 
-    cy.contains('someValue');
+    getRenderJsonValue().should('have.value', 'someValue');
   });
 
   it('can navigate back to the clients page from the feedback page', () => {
