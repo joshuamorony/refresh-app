@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
 import { of } from 'rxjs';
+import { MockRenderJsonComponent } from '../../../shared/ui/render-json/render-json.component.spec';
 import { FeedbackService } from '../../../feedback/data-access/feedback.service';
 import { ClientsStore, Feedback } from '../../data-access/clients.store';
 
@@ -24,7 +25,7 @@ describe('ClientFeedbackDetailPage', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ClientFeedbackDetailPage],
+        declarations: [ClientFeedbackDetailPage, MockRenderJsonComponent],
         providers: [
           {
             provide: ActivatedRoute,
