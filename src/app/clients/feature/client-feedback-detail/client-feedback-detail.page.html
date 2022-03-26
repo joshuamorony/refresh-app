@@ -10,8 +10,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf="feedback$ | async as feedback">
-    <pre>{{feedback | json }}</pre>
-  </div>
+<ion-content class="ion-padding">
+  <app-render-json
+    *ngIf="feedback$ | async as feedback"
+    [json]="feedback.response"
+  ></app-render-json>
 </ion-content>

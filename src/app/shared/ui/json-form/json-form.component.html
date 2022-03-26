@@ -1,6 +1,8 @@
 <form [formGroup]="formGroup" (ngSubmit)="saveForm()" #jsonForm="ngForm">
-  <ion-item *ngFor="let control of formData.controls">
-    <ion-label *ngIf="control.label !== ''">{{ control.label }}</ion-label>
+  <ion-item lines="none" *ngFor="let control of formData.controls">
+    <ion-label position="stacked" *ngIf="control.label !== ''">{{
+      control.label
+    }}</ion-label>
     <ion-datetime
       *ngIf="control.type === 'date'"
       [formControlName]="control.name"

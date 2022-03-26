@@ -1,0 +1,10 @@
+<ion-item
+  data-test="json-entry-container"
+  *ngFor="let response of parsedJson | keyvalue"
+  lines="none"
+>
+  <ion-label position="stacked" data-test="json-key">{{
+    response.key
+  }}</ion-label>
+  <ion-input data-test="json-value" [value]="response.value"></ion-input>
+</ion-item>
