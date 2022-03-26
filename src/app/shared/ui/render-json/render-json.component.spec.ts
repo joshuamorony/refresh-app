@@ -58,9 +58,7 @@ describe('RenderJsonComponent', () => {
 
       expect(items.length).toEqual(Object.keys(testJson).length);
       expect(label.nativeElement.innerHTML).toContain(Object.keys(testJson)[0]);
-      expect(value.nativeElement.innerHTML).toContain(
-        Object.values(testJson)[0]
-      );
+      expect(value.nativeElement.value).toEqual(Object.values(testJson)[0]);
     });
   });
 });
