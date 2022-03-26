@@ -1,0 +1,36 @@
+ion-item::part(native) {
+  background: var(--ion-color-primary);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px var(--shadow-transparent);
+  font-weight: bold;
+  padding: 1rem;
+}
+
+ion-label {
+  white-space: normal !important;
+  margin-bottom: 1rem !important;
+}
+
+ion-input,
+ion-textarea {
+  --background: var(--ion-color-light);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+app-checkbox-group {
+  width: 100%;
+}
+
+ion-radio-group {
+  width: 100%;
+
+  ion-item::part(native) {
+    background: var(--ion-color-light);
+  }
+}
+
+ion-range {
+  --bar-background-active: var(--ion-color-secondary);
+}
