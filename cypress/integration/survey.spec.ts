@@ -1,6 +1,10 @@
-import { getForm, getSubmitButton, getThankYouMessage } from '../support/utils';
+import {
+  getSurveyForm,
+  getSubmitButton,
+  getThankYouMessage,
+} from '../support/utils';
 
-describe('Feedback', () => {
+describe('Survey', () => {
   beforeEach(() => {
     cy.callFirestore('delete', 'clients');
 
@@ -19,7 +23,7 @@ describe('Feedback', () => {
   });
 
   it('can submit survey form', () => {
-    getForm().should('exist');
+    getSurveyForm().should('exist');
     getSubmitButton().click();
     cy.get('form', { timeout: 10000 }).should('not.exist');
     getSubmitButton().should('not.exist');

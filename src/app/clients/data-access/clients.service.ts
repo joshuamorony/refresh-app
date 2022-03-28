@@ -53,4 +53,8 @@ export class ClientsService {
     const clientDocReference = doc(this.firestore, `clients/${id}`);
     return deleteDoc(clientDocReference);
   }
+
+  public saveSurvey(response: any, id: string) {
+    return Promise.resolve();
+  }
 }
