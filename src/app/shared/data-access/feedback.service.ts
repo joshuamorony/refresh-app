@@ -19,6 +19,7 @@ export class FeedbackService {
   public saveFeedback(response: any) {
     const feedbackCollection = collection(this.firestore, 'feedback');
     return addDoc(feedbackCollection, {
+      timestamp: Date.now().toString(),
       response: JSON.stringify(response),
     });
   }
