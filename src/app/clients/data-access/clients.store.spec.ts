@@ -3,10 +3,10 @@ import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { ClientsStore } from './clients.store';
 import { ClientsService } from './clients.service';
 import { of } from 'rxjs';
-import { FeedbackService } from '../../feedback/data-access/feedback.service';
+import { FeedbackService } from '../../shared/data-access/feedback.service';
 
 jest.mock('./clients.service');
-jest.mock('../../feedback/data-access/feedback.service');
+jest.mock('../../shared/data-access/feedback.service');
 
 describe('ClientsStore', () => {
   let service: ClientsStore;

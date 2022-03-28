@@ -2,29 +2,27 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
 import { MockJsonFormComponent } from '../../../shared/ui/json-form/json-form.component.spec';
-import { FeedbackService } from '../../data-access/feedback.service';
+import { FeedbackService } from '../../../shared/data-access/feedback.service';
 
 import { FeedbackPage } from './feedback.page';
 
-jest.mock('../../data-access/feedback.service');
+jest.mock('../../../shared/data-access/feedback.service');
 
 describe('FeedbackPage', () => {
   let component: FeedbackPage;
   let fixture: ComponentFixture<FeedbackPage>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [FeedbackPage, MockJsonFormComponent],
-        providers: [FeedbackService],
-        imports: [IonicModule.forRoot()],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FeedbackPage, MockJsonFormComponent],
+      providers: [FeedbackService],
+      imports: [IonicModule.forRoot()],
+    }).compileComponents();
 
-      fixture = TestBed.createComponent(FeedbackPage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+    fixture = TestBed.createComponent(FeedbackPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
