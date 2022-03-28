@@ -1,0 +1,255 @@
+{
+  "controls": [
+    {
+      "name": "dob",
+      "label": "Date of Birth",
+      "type": "date",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "name",
+      "label": "Name",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "address",
+      "label": "Address",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "phone",
+      "label": "Phone",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "occupation",
+      "label": "Occupation",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "healthfund",
+      "label": "Health Fund",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "emergencyName",
+      "label": "Emergency Contact Name",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "emergencyNumber",
+      "label": "Phone Number",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "emergencyRelationship",
+      "label": "Relationship",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "previousMassage",
+      "label": "Have you had a massage before?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "reason",
+      "label": "What is the main reason for your visit?",
+      "value": "",
+      "type": "textarea",
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "stateOfHealth",
+      "label": "General State of Health",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "stressLevel",
+      "label": "Current Stress Level",
+      "value": "5",
+      "type": "range",
+      "options": {
+        "min": "1",
+        "max": "10",
+        "step": "1",
+        "icon": "bed-outline"
+      },
+      "validators": {}
+    },
+    {
+      "name": "activities",
+      "label": "List of physical activities",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "doctor",
+      "label": "Are you currently seeing a doctor, naturopath, or other health practitioner?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "doctorReason",
+      "label": "If yes, for what condition(s)?",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "medication",
+      "label": "Are you taking any prescribed medication(s)?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "medicationReason",
+      "label": "If yes, for what?",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "allergies",
+      "label": "Do you have any allergies?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "allergiesReason",
+      "label": "If yes, provide details",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "buttocks",
+      "label": "Do I have permission to include the upper buttocks?",
+      "type": "radio",
+      "options": {
+        "items": [
+          { "label": "Yes", "value": "yes" },
+          { "label": "No", "value": "no" }
+        ]
+      },
+      "validators": {
+        "required": true
+      }
+    },
+    {
+      "name": "painAreas",
+      "label": "Are you currently experiencing pain in any particular areas?",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    },
+    {
+      "name": "problems",
+      "label": "Have you had (or currently have) any of the following?",
+      "type": "checkbox",
+      "options": {
+        "items": [
+          { "label": "Inflammation", "value": "inflammation" },
+          { "label": "Skin Condition", "value": "skin-condition" },
+          { "label": "Whiplash", "value": "whiplash" },
+          { "label": "Surgery", "value": "surgery" },
+          { "label": "Fever", "value": "fever" },
+          { "label": "Sprain/brusies", "value": "sprain-bruises" },
+          { "label": "Infectious Disease", "value": "infectious-disease" },
+          { "label": "Varicose Veins", "value": "varicose-veins" },
+          { "label": "Abnormal Swelling", "value": "abnormal-swelling" },
+          { "label": "Heart Condition", "value": "heart-condition" },
+          { "label": "High Blood Pressure", "value": "high-blood-pressure" },
+          { "label": "Arthritis", "value": "arthritis" },
+          { "label": "Fracture", "value": "fracture" },
+          { "label": "Diabetes", "value": "diabetes" },
+          { "label": "Any form of cancer", "value": "cancer" },
+          { "label": "Any severe pain", "value": "severe-pain" }
+        ]
+      },
+      "validators": {}
+    },
+    {
+      "name": "otherConditions",
+      "label": "List past or present medical conditions, injuries, illnesses, or problems",
+      "value": "",
+      "type": "textarea",
+      "validators": {}
+    }
+  ]
+}
