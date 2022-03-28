@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { HomeStore } from '../data-access/home.store';
 
@@ -8,27 +9,25 @@ describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
 
-  beforeEach(
-    waitForAsync(() => {
-      jest.restoreAllMocks();
-      jest.clearAllMocks();
+  beforeEach(waitForAsync(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks();
 
-      TestBed.configureTestingModule({
-        declarations: [HomePage],
-        imports: [IonicModule.forRoot()],
-      }).compileComponents();
+    TestBed.configureTestingModule({
+      declarations: [HomePage],
+      imports: [IonicModule.forRoot(), RouterTestingModule],
+    }).compileComponents();
 
-      TestBed.overrideProvider(HomeStore, {
-        useValue: {
-          login: jest.fn(),
-        },
-      });
+    TestBed.overrideProvider(HomeStore, {
+      useValue: {
+        login: jest.fn(),
+      },
+    });
 
-      fixture = TestBed.createComponent(HomePage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+    fixture = TestBed.createComponent(HomePage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
