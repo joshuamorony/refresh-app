@@ -20,6 +20,7 @@ describe('ClientFeedbackDetailPage', () => {
   const testFeedback: Feedback = {
     id: '123',
     response: 'test',
+    timestamp: '',
   };
 
   beforeEach(waitForAsync(() => {

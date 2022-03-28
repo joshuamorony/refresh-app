@@ -26,6 +26,7 @@ export interface Client {
 
 export interface Feedback {
   id: string;
+  timestamp: string;
   response: string;
 }
 

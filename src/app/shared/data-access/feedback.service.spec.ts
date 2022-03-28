@@ -43,6 +43,10 @@ describe('FeedbackService', () => {
   });
 
   it('saveFeedback should create a new document in the feedback collection using the supplied data ', () => {
+    jest
+      .useFakeTimers('modern')
+      .setSystemTime(new Date('2020-01-01').getTime());
+
     const mockCollectionReference = jest.fn();
 
     const testFeedback = {
@@ -64,6 +68,7 @@ describe('FeedbackService', () => {
     expect(AngularFireFirestore.addDoc).toHaveBeenCalledWith(
       mockCollectionReference,
       {
+        timestamp: Date.now().toString(),
         response: JSON.stringify(testFeedback),
       }
     );
