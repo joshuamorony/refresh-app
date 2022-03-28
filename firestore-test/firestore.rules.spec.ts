@@ -49,19 +49,6 @@ describe('Firestore security rules', () => {
     });
   });
 
-  it('non admin user can not read/write from the clients collection', async () => {
-    const db = getFirestore();
-    const newDoc = doc(db, 'clients', 'testDoc');
-    const existingDoc = doc(db, 'clients', 'existingDoc');
-
-    await Promise.all([
-      assertFails(getDoc(existingDoc)), //read
-      assertFails(setDoc(newDoc, { foo: 'bar' })), // create
-      assertFails(setDoc(existingDoc, { foo: 'bar' })), // update
-      assertFails(deleteDoc(existingDoc)), // delete
-    ]);
-  });
-
   it('non admin user can not read/write from the notes collection', async () => {
     const db = getFirestore();
     const newDoc = doc(db, 'notes', 'testDoc');
@@ -110,6 +97,19 @@ describe('Firestore security rules', () => {
       assertFails(getDoc(existingDoc)), //read
       assertSucceeds(setDoc(newDoc, { foo: 'bar' })), // create
       assertFails(setDoc(existingDoc, { foo: 'bar' })), // update
+      assertFails(deleteDoc(existingDoc)), // delete
+    ]);
+  });
+
+  it('unauthenticated users can ONLY update documents in the clients collection', async () => {
+    const db = getFirestore();
+    const newDoc = doc(db, 'clients', 'testDoc');
+    const existingDoc = doc(db, 'clients', 'existingDoc');
+
+    await Promise.all([
+      assertFails(getDoc(existingDoc)), //read
+      assertFails(setDoc(newDoc, { foo: 'bar' })), // create
+      assertSucceeds(setDoc(existingDoc, { foo: 'bar' })), // update
       assertFails(deleteDoc(existingDoc)), // delete
     ]);
   });
