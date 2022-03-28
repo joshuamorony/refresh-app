@@ -6,12 +6,12 @@ import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
 import { of } from 'rxjs';
 import { MockRenderJsonComponent } from '../../../shared/ui/render-json/render-json.component.spec';
-import { FeedbackService } from '../../../feedback/data-access/feedback.service';
+import { FeedbackService } from '../../../shared/data-access/feedback.service';
 import { ClientsStore, Feedback } from '../../data-access/clients.store';
 
 import { ClientFeedbackDetailPage } from './client-feedback-detail.page';
 
-jest.mock('../../../feedback/data-access/feedback.service');
+jest.mock('../../../shared/data-access/feedback.service');
 
 describe('ClientFeedbackDetailPage', () => {
   let component: ClientFeedbackDetailPage;
@@ -22,38 +22,36 @@ describe('ClientFeedbackDetailPage', () => {
     response: 'test',
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ClientFeedbackDetailPage, MockRenderJsonComponent],
-        providers: [
-          {
-            provide: ActivatedRoute,
-            useValue: {
-              paramMap: of(convertToParamMap({ id: testFeedback.id })),
-            },
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ClientFeedbackDetailPage, MockRenderJsonComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of(convertToParamMap({ id: testFeedback.id })),
           },
-          FeedbackService,
-        ],
-        imports: [IonicModule.forRoot(), RouterTestingModule],
-      })
-        .overrideComponent(ClientFeedbackDetailPage, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-
-      TestBed.overrideProvider(ClientsStore, {
-        useValue: {
-          feedbacks$: of([testFeedback]),
-          loadFeedbacks: jest.fn(),
         },
-      });
-
-      fixture = TestBed.createComponent(ClientFeedbackDetailPage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
+        FeedbackService,
+      ],
+      imports: [IonicModule.forRoot(), RouterTestingModule],
     })
-  );
+      .overrideComponent(ClientFeedbackDetailPage, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
+
+    TestBed.overrideProvider(ClientsStore, {
+      useValue: {
+        feedbacks$: of([testFeedback]),
+        loadFeedbacks: jest.fn(),
+      },
+    });
+
+    fixture = TestBed.createComponent(ClientFeedbackDetailPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

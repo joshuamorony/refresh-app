@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { JsonFormData } from 'src/app/shared/ui/json-form/json-form.component';
 import * as feedbackFormData from '../../../../assets/feedback-form.json';
-import { FeedbackService } from '../../data-access/feedback.service';
+import { FeedbackService } from '../../../shared/data-access/feedback.service';
 
 @Component({
   selector: 'app-feedback',

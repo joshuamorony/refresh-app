@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { first, switchMap, tap } from 'rxjs/operators';
-import { FeedbackService } from '../../feedback/data-access/feedback.service';
+import { FeedbackService } from '../../shared/data-access/feedback.service';
 import { ClientShellModule } from '../feature/client-shell/client-shell.module';
 import { ClientsService } from './clients.service';
 
