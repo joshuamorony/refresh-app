@@ -12,7 +12,9 @@
     routerLink="{{ feedback.id }}"
     routerDirection="forward"
   >
-    <ion-label>Client Feedback</ion-label>
+    <ion-label>
+      {{ feedback.timestamp | date: "dd/MM/yyyy" }}
+    </ion-label>
   </ion-item>
 </ion-list>
 <ng-template #loading>
