@@ -1,12 +1,6 @@
 {
   "controls": [
     {
-      "name": "treatmentDate",
-      "label": "Treatment Date",
-      "type": "date",
-      "validators": {}
-    },
-    {
       "name": "onTime",
       "label": "Was your treatment on time?",
       "type": "radio",
@@ -150,72 +144,10 @@
       "validators": {}
     },
     {
-      "name": "areasRelaxing",
-      "label": "What areas of the body did you find most relaxing?",
-      "type": "checkbox",
-      "options": {
-        "items": [
-          { "label": "Head (front)", "value": "head-front" },
-          { "label": "Head (back)", "value": "head-back" },
-          { "label": "Chest", "value": "chest" },
-          { "label": "Upper Back", "value": "upper-back" },
-          { "label": "Lower Back", "value": "lower-back" },
-          { "label": "Shoulders", "value": "shoulders" },
-          { "label": "Upper Arms", "value": "upper-arms" },
-          { "label": "Lower Arms", "value": "lower-arms" },
-          { "label": "Hands", "value": "hands" },
-          { "label": "Abdominal", "value": "abdominal" },
-          { "label": "Upper Leg", "value": "upper-leg" },
-          { "label": "Lower Leg", "value": "lower-leg" },
-          { "label": "Feet", "value": "feet" }
-        ]
-      },
-      "validators": {}
-    },
-    {
-      "name": "areasFavourite",
-      "label": "Which areas did you like the most?",
-      "type": "checkbox",
-      "options": {
-        "items": [
-          { "label": "Head (front)", "value": "head-front" },
-          { "label": "Head (back)", "value": "head-back" },
-          { "label": "Chest", "value": "chest" },
-          { "label": "Upper Back", "value": "upper-back" },
-          { "label": "Lower Back", "value": "lower-back" },
-          { "label": "Shoulders", "value": "shoulders" },
-          { "label": "Upper Arms", "value": "upper-arms" },
-          { "label": "Lower Arms", "value": "lower-arms" },
-          { "label": "Hands", "value": "hands" },
-          { "label": "Abdominal", "value": "abdominal" },
-          { "label": "Upper Leg", "value": "upper-leg" },
-          { "label": "Lower Leg", "value": "lower-leg" },
-          { "label": "Feet", "value": "feet" }
-        ]
-      },
-      "validators": {}
-    },
-    {
-      "name": "areasImprovment",
-      "label": "Which areas did you least enjoy?",
-      "type": "checkbox",
-      "options": {
-        "items": [
-          { "label": "Head (front)", "value": "head-front" },
-          { "label": "Head (back)", "value": "head-back" },
-          { "label": "Chest", "value": "chest" },
-          { "label": "Upper Back", "value": "upper-back" },
-          { "label": "Lower Back", "value": "lower-back" },
-          { "label": "Shoulders", "value": "shoulders" },
-          { "label": "Upper Arms", "value": "upper-arms" },
-          { "label": "Lower Arms", "value": "lower-arms" },
-          { "label": "Hands", "value": "hands" },
-          { "label": "Abdominal", "value": "abdominal" },
-          { "label": "Upper Leg", "value": "upper-leg" },
-          { "label": "Lower Leg", "value": "lower-leg" },
-          { "label": "Feet", "value": "feet" }
-        ]
-      },
+      "name": "preferredAreas",
+      "label": "Were there any particular areas of the body you found more or less enjoyable?",
+      "value": "",
+      "type": "textarea",
       "validators": {}
     },
     {
