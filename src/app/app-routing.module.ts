@@ -21,11 +21,17 @@ const routes: Routes = [
   },
   {
     path: 'feedback',
-    loadChildren: () => import('./feedback/feature/feedback/feedback.module').then( m => m.FeedbackPageModule)
+    loadChildren: () =>
+      import('./feedback/feature/feedback/feedback.module').then(
+        (m) => m.FeedbackPageModule
+      ),
   },
   {
     path: 'client-history/:id',
-    loadChildren: () => import('./client-history/feature/client-history/client-history.module').then( m => m.ClientHistoryPageModule)
+    loadChildren: () =>
+      import(
+        './client-history/feature/client-history/client-history.module'
+      ).then((m) => m.ClientHistoryPageModule),
   },
 ];
 

@@ -15,6 +15,10 @@ const routes: Routes = [
         (m) => m.ClientAddPageModule
       ),
   },
+  {
+    path: 'history',
+    loadChildren: () => import('../client-survey/client-survey.module').then( m => m.ClientSurveyPageModule)
+  },
 ];
 
 @NgModule({

@@ -28,6 +28,13 @@
   <ng-container *ngIf="{ client: client$ | async } as vm">
     <app-client-detail-card [client]="vm.client"> </app-client-detail-card>
     <ion-button
+      data-test="view-survey-responses-button"
+      routerLink="history"
+      routerDirection="forward"
+    >
+      View Responses
+    </ion-button>
+    <ion-button
       data-test="delete-button"
       class="delete-client"
       color="primary"

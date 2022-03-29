@@ -16,6 +16,13 @@
         <ion-icon slot="start" name="call-outline"></ion-icon>
         <ion-label> {{ client.phone }} </ion-label>
       </ion-item>
+
+      <ion-item lines="none" data-test="link-display">
+        <ion-icon slot="start" name="link-outline"></ion-icon>
+        <ion-label>
+          {{ document.location.origin }}/client-history/{{ client.id }}
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 

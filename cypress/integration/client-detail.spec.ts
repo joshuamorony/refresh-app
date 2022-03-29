@@ -2,8 +2,12 @@ import {
   getAddClientBackButton,
   getClientDetailBackButton,
   getEditButton,
+  getLinkDisplay,
   getNameDisplay,
+  getRenderJsonValue,
+  getSurveyResponseList,
   getTitle,
+  getViewSurveyResponsesButton,
 } from '../support/utils';
 
 describe('Clients', () => {
@@ -17,6 +21,7 @@ describe('Clients', () => {
     phone: '333',
     email: 'joshua.morony@gmail.com',
     notes: '',
+    survey: ['{"someProperty": "someValue"}'],
   };
 
   beforeEach(() => {
@@ -37,5 +42,18 @@ describe('Clients', () => {
   it('can navigate back to the client-dashboard', () => {
     getClientDetailBackButton().click();
     getTitle().should('contain.text', 'Clients');
+  });
+
+  it('can view the link to the clients history form', () => {
+    getLinkDisplay().should('contain.text', `/client-history/${testId}`);
+  });
+
+  it('can view responses to the client history form for individual clients', () => {
+    cy.callFirestore('set', 'clients/abc123', testClient);
+
+    getViewSurveyResponsesButton().click();
+    getSurveyResponseList().first().click();
+
+    getRenderJsonValue().should('have.value', 'someValue');
   });
 });

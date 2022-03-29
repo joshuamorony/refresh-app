@@ -13,6 +13,7 @@ describe('Survey', () => {
         first: 'Josh',
         last: 'Morony',
       },
+      survey: ['{"someProperty": "someValue"}'],
     });
 
     cy.visit('/client-history/abc123');

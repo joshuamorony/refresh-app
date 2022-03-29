@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Client Survey Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-render-json
+    *ngIf="client$ | async as client"
+    [json]="client.survey[route.snapshot.paramMap.get('index')]"
+  ></app-render-json>
+</ion-content>
