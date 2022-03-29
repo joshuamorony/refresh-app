@@ -5,9 +5,22 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <app-json-form
-    data-test="survey-form"
-    [formGroup]="surveyForm"
-    [formData]="surveyFormData"
-  ></app-json-form>
+  <ng-container
+    *ngIf="surveyFormSubmitted$ | async as submission; else jsonForm"
+  >
+    <p *ngIf="submission === 'success'" data-test="thankyou-message">
+      Thank you, see you at your appointment!
+    </p>
+    <p *ngIf="submission === 'error'" data-test="error-message">
+      Sorry, the form could not be submitted!
+    </p>
+  </ng-container>
+  <ng-template #jsonForm>
+    <app-json-form
+      (save)="save()"
+      data-test="survey-form"
+      [formGroup]="surveyForm"
+      [formData]="surveyFormData"
+    ></app-json-form>
+  </ng-template>
 </ion-content>

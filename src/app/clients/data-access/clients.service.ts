@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import {
   addDoc,
+  arrayUnion,
   collection,
   collectionData,
   deleteDoc,
   doc,
   Firestore,
   setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { concat, Observable, of, throwError } from 'rxjs';
 import { catchError, filter, retryWhen, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../shared/data-access/auth.service';
-import { ClientShellModule } from '../feature/client-shell/client-shell.module';
 import { Client } from './clients.store';
 
 @Injectable({
-  providedIn: ClientShellModule,
+  providedIn: 'root',
 })
 export class ClientsService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
@@ -55,6 +56,9 @@ export class ClientsService {
   }
 
   public saveSurvey(response: any, id: string) {
-    return Promise.resolve();
+    const clientDocReference = doc(this.firestore, `clients/${id}`);
+    return updateDoc(clientDocReference, {
+      survey: arrayUnion(JSON.stringify(response)),
+    });
   }
 }

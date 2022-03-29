@@ -26,7 +26,9 @@ describe('ClientHistoryPage', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(convertToParamMap({ id: testClientId })),
+            snapshot: {
+              paramMap: convertToParamMap({ id: testClientId }),
+            },
           },
         },
       ],

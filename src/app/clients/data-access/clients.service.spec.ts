@@ -187,4 +187,36 @@ describe('ClientsService', () => {
       );
     });
   });
+
+  describe('saveSurvey()', () => {
+    it('should add the supplied data to the survey array for the client matching the id supplied ', () => {
+      const mockDocumentReference = jest.fn();
+
+      const testResponse = {
+        test: 'value',
+      };
+
+      const testId = '123';
+
+      jest
+        .spyOn(AngularFireFirestore, 'doc')
+        .mockReturnValue(mockDocumentReference as any);
+
+      jest.spyOn(AngularFireFirestore, 'updateDoc');
+
+      service.saveSurvey(testResponse, testId);
+
+      expect(AngularFireFirestore.doc).toHaveBeenCalledWith(
+        {},
+        `clients/${testId}`
+      );
+
+      expect(AngularFireFirestore.updateDoc).toHaveBeenCalledWith(
+        mockDocumentReference,
+        {
+          survey: AngularFireFirestore.arrayUnion(JSON.stringify(testResponse)),
+        }
+      );
+    });
+  });
 });

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { JsonFormData } from '../../../shared/ui/json-form/json-form.component';
 
 import * as surveyFormData from '../../../../assets/survey-form.json';
+import { ClientsService } from '../../../clients/data-access/clients.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-client-history',
@@ -14,8 +16,22 @@ import * as surveyFormData from '../../../../assets/survey-form.json';
 export class ClientHistoryPage {
   surveyForm = new FormGroup({});
   surveyFormData: JsonFormData = surveyFormData;
+  surveyFormSubmitted$ = new BehaviorSubject<'success' | 'error'>(null);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private clientsService: ClientsService
+  ) {}
 
-  save() {}
+  async save() {
+    try {
+      await this.clientsService.saveSurvey(
+        this.surveyForm.value,
+        this.route.snapshot.paramMap.get('id')
+      );
+      this.surveyFormSubmitted$.next('success');
+    } catch (err) {
+      this.surveyFormSubmitted$.next('error');
+    }
+  }
 }
