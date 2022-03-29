@@ -1,0 +1,22 @@
+<ion-list lines="none" data-test="survey-list" *ngIf="surveys; else loading">
+  <p data-test="no-surveys-message" *ngIf="!surveys.length">
+    No client history available
+  </p>
+  <ion-item
+    button
+    routerLink="{{ index }}"
+    routerDirection="forward"
+    *ngFor="let survey of surveys; let index = index"
+  >
+    <ion-label> Survey Response </ion-label>
+  </ion-item>
+</ion-list>
+<ng-template #loading>
+  <ion-list lines="none" data-test="survey-loading">
+    <ion-item>
+      <ion-label>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>
