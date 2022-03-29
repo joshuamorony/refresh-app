@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Inject,
+} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Client } from '../../data-access/clients.store';
 
 @Component({
@@ -10,5 +16,5 @@ import { Client } from '../../data-access/clients.store';
 export class ClientDetailCardComponent {
   @Input() client: Client;
 
-  constructor() {}
+  constructor(@Inject(DOCUMENT) public document: Document) {}
 }

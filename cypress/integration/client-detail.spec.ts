@@ -2,6 +2,7 @@ import {
   getAddClientBackButton,
   getClientDetailBackButton,
   getEditButton,
+  getLinkDisplay,
   getNameDisplay,
   getTitle,
 } from '../support/utils';
@@ -37,5 +38,9 @@ describe('Clients', () => {
   it('can navigate back to the client-dashboard', () => {
     getClientDetailBackButton().click();
     getTitle().should('contain.text', 'Clients');
+  });
+
+  it('can view the link to the clients history form', () => {
+    getLinkDisplay().should('contain.text', `/client-history/${testId}`);
   });
 });
