@@ -53,3 +53,7 @@ export const getFeedbackButton = () => cy.get('[data-test="feedback-button"]');
 
 // Survey
 export const getSurveyForm = () => cy.get('[data-test="survey-form"]');
+export const getViewSurveyResponsesButton = () =>
+  cy.get('[data-test="view-survey-responses-button"]');
+export const getSurveyResponseList = () =>
+  cy.get('[data-test="survey-response-list"]');

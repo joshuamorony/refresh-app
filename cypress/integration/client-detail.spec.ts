@@ -4,7 +4,9 @@ import {
   getEditButton,
   getLinkDisplay,
   getNameDisplay,
+  getSurveyResponseList,
   getTitle,
+  getViewSurveyResponsesButton,
 } from '../support/utils';
 
 describe('Clients', () => {
@@ -42,5 +44,14 @@ describe('Clients', () => {
 
   it('can view the link to the clients history form', () => {
     getLinkDisplay().should('contain.text', `/client-history/${testId}`);
+  });
+
+  it('can view responses to the client history form for individual clients', () => {
+    cy.callFirestore('set', 'clients/abc123', testClient);
+
+    getViewSurveyResponsesButton().click();
+    getSurveyResponseList().first().click();
+
+    cy.contains('someValue');
   });
 });
