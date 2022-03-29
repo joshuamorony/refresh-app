@@ -29,52 +29,51 @@ describe('ClientDetailPage', () => {
     survey: [],
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ClientDetailPage, MockClientDetailCardComponent],
-        imports: [IonicModule.forRoot(), RouterTestingModule],
-        providers: [
-          {
-            provide: ActivatedRoute,
-            useValue: {
-              paramMap: of(convertToParamMap({ id: testClient.id })),
-            },
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ClientDetailPage, MockClientDetailCardComponent],
+      imports: [IonicModule.forRoot(), RouterTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of(convertToParamMap({ id: testClient.id })),
+            snapshot: convertToParamMap({ id: testClient.id }),
           },
-          {
-            provide: NavController,
-            useValue: {
-              navigateBack: jest.fn(),
-            },
-          },
-          {
-            provide: AlertController,
-            useValue: {
-              create: jest.fn().mockResolvedValue({
-                present: jest.fn(),
-              }),
-            },
-          },
-          ClientsService,
-        ],
-      })
-        .overrideComponent(ClientDetailPage, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-
-      TestBed.overrideProvider(ClientsStore, {
-        useValue: {
-          clients$: of([testClient]),
-          loadClients: jest.fn(),
         },
-      });
-
-      fixture = TestBed.createComponent(ClientDetailPage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
+        {
+          provide: NavController,
+          useValue: {
+            navigateBack: jest.fn(),
+          },
+        },
+        {
+          provide: AlertController,
+          useValue: {
+            create: jest.fn().mockResolvedValue({
+              present: jest.fn(),
+            }),
+          },
+        },
+        ClientsService,
+      ],
     })
-  );
+      .overrideComponent(ClientDetailPage, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
+
+    TestBed.overrideProvider(ClientsStore, {
+      useValue: {
+        clients$: of([testClient]),
+        loadClients: jest.fn(),
+      },
+    });
+
+    fixture = TestBed.createComponent(ClientDetailPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

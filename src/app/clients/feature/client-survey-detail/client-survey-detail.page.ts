@@ -1,19 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-client-survey-detail',
   templateUrl: './client-survey-detail.page.html',
   styleUrls: ['./client-survey-detail.page.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientSurveyDetailPage implements OnInit {
-
-  params: Params;
-
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.params = this.route.snapshot.params;
-  }
-
-}
+export class ClientSurveyDetailPage {}
