@@ -10,10 +10,6 @@ interface ClientName {
   last: string;
 }
 
-interface SurveyResponse {
-  values: string;
-}
-
 export interface Client {
   id?: string;
   name: ClientName;
@@ -21,7 +17,7 @@ export interface Client {
   phone: string;
   appointments: string[];
   notes: string;
-  survey: SurveyResponse[];
+  survey: string[];
 }
 
 export interface Feedback {

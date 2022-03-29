@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Client } from '../../data-access/clients.store';
 
 @Component({
   selector: 'app-survey-list',
@@ -8,5 +7,5 @@ import { Client } from '../../data-access/clients.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyListComponent {
-  @Input() surveys: Pick<Client, 'survey'>[];
+  @Input() surveys: string[];
 }

@@ -4,6 +4,7 @@ import {
   getEditButton,
   getLinkDisplay,
   getNameDisplay,
+  getRenderJsonValue,
   getSurveyResponseList,
   getTitle,
   getViewSurveyResponsesButton,
@@ -20,6 +21,7 @@ describe('Clients', () => {
     phone: '333',
     email: 'joshua.morony@gmail.com',
     notes: '',
+    survey: ['{"someProperty": "someValue"}'],
   };
 
   beforeEach(() => {
@@ -52,6 +54,6 @@ describe('Clients', () => {
     getViewSurveyResponsesButton().click();
     getSurveyResponseList().first().click();
 
-    cy.contains('someValue');
+    getRenderJsonValue().should('have.value', 'someValue');
   });
 });

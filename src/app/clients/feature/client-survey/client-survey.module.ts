@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ClientSurveyPageRoutingModule } from './client-survey-routing.module';
 
 import { ClientSurveyPage } from './client-survey.page';
+import { SurveyListComponentModule } from '../../ui/survey-list/survey-list.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientSurveyPageRoutingModule
+    ClientSurveyPageRoutingModule,
+    SurveyListComponentModule,
   ],
-  declarations: [ClientSurveyPage]
+  declarations: [ClientSurveyPage],
 })
 export class ClientSurveyPageModule {}

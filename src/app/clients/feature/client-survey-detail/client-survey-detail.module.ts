@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ClientSurveyDetailPageRoutingModule } from './client-survey-detail-routing.module';
 
 import { ClientSurveyDetailPage } from './client-survey-detail.page';
+import { RenderJsonComponentModule } from '../../../shared/ui/render-json/render-json.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ClientSurveyDetailPageRoutingModule
+    ClientSurveyDetailPageRoutingModule,
+    RenderJsonComponentModule,
   ],
-  declarations: [ClientSurveyDetailPage]
+  declarations: [ClientSurveyDetailPage],
 })
 export class ClientSurveyDetailPageModule {}

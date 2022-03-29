@@ -4,6 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <ng-container *ngIf="{ client: client$ | async } as vm">
+    <app-survey-list
+      *ngIf="vm.client"
+      [surveys]="vm.client.survey"
+    ></app-survey-list>
+  </ng-container>
 </ion-content>
