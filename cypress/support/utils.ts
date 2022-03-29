@@ -49,3 +49,6 @@ export const getItemsInFeedbackList = () =>
 export const getRenderJsonValue = () => cy.get('[data-test="json-value"]');
 
 export const getFeedbackButton = () => cy.get('[data-test="feedback-button"]');
+
+// Survey
+export const getSurveyForm = () => cy.get('[data-test="survey-form"]');
