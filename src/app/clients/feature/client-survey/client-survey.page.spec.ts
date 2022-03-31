@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { IonicModule } from '@ionic/angular';
 import { of } from 'rxjs';
@@ -42,7 +43,7 @@ describe('ClientSurveyPage', () => {
         },
         ClientsService,
       ],
-      imports: [IonicModule.forRoot()],
+      imports: [IonicModule.forRoot(), RouterTestingModule],
     })
       .overrideComponent(ClientSurveyPage, {
         set: { changeDetection: ChangeDetectionStrategy.Default },

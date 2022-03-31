@@ -19,9 +19,9 @@
 
       <ion-item lines="none" data-test="link-display">
         <ion-icon slot="start" name="link-outline"></ion-icon>
-        <ion-label>
-          {{ document.location.origin }}/client-history/{{ client.id }}
-        </ion-label>
+        <ion-input
+          value="{{ document.location.origin }}/client-history/{{ client.id }}"
+        ></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>

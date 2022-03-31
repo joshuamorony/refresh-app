@@ -31,7 +31,7 @@ export const getClientDetailBackButton = () =>
   cy.get('[data-test="client-detail-back-button"]');
 export const getDeleteButton = () => cy.get('[data-test="delete-button"]');
 export const getConfirmButton = () => cy.get('#confirm-delete');
-export const getLinkDisplay = () => cy.get('[data-test="link-display"]');
+export const getLinkDisplay = () => cy.get('[data-test="link-display"] input');
 
 // Feedback
 export const getForm = () => cy.get('[data-test="feedback-form"]');
@@ -56,3 +56,7 @@ export const getSurveyForm = () => cy.get('[data-test="survey-form"]');
 export const getViewSurveyResponsesButton = () =>
   cy.get('[data-test="view-survey-responses-button"]');
 export const getSurveyResponseList = () => cy.get('[data-test="survey-list"]');
+export const getViewSurveyResponsesBackButton = () =>
+  cy.get('[data-test="view-survey-responses-back-button"]');
+export const getViewSurveyResponseDetailBackButton = () =>
+  cy.get('[data-test="view-survey-response-detail-back-button"]');
